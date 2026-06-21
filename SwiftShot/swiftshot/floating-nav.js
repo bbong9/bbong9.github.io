@@ -10,7 +10,7 @@
 
   const findTrigger = () => {
     return document.querySelector('.wiki-hero-bottom')
-      || document.querySelector('.ss-doc-section, .ss-feature-section, .ss-privacy-section, .ss-faq-section')
+      || document.querySelector('.ss-doc-section, .ss-feature-section, .ss-faq-section')
       || document.querySelector('.wiki-section')
       || document.querySelector('article.doc h1:not([hidden])')
       || document.querySelector('#VPContent');
