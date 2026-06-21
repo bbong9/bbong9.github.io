@@ -1829,3 +1829,20 @@ html.dark .VPNav.wiki-nav.is-floating .VPSwitchAppearance,
 @media(prefers-reduced-motion:reduce){
   .VPNav.wiki-nav,.VPNav.wiki-nav .nav-shell,.VPNav.wiki-nav .nav-shell::before,.VPNav.wiki-nav .brand,.VPNav.wiki-nav .top-menu a{transition:none!important}
 }
+
+
+/* 20260622 top nav FAQ/changelog spacing */
+@media(min-width:960px){
+  .VPNav.wiki-nav .top-menu a{white-space:nowrap}
+}
+@media(min-width:960px) and (max-width:1120px){
+  .VPNav.wiki-nav .nav-shell{padding-left:18px;padding-right:18px}
+  .VPNav.wiki-nav .nav-right{gap:10px}
+  .VPNav.wiki-nav .top-menu a{height:34px;padding:0 9px;font-size:13.5px}
+  .VPNav.wiki-nav .brand{gap:8px;font-size:15px}
+  .VPNav.wiki-nav .brand-mark{width:26px;height:26px}
+}
+@media(min-width:960px) and (max-width:1010px){
+  .VPNav.wiki-nav .top-menu a{padding:0 8px;font-size:13px}
+  .VPNav.wiki-nav .nav-right{gap:8px}
+}
