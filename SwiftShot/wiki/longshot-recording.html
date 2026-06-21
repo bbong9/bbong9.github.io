@@ -6,7 +6,7 @@
   <title>长截图与区域录屏 | SwiftShot Wiki</title>
   <meta name="description" content="长截图用于完整页面，区域录屏用于教程演示；两个入口都可以从截图选区直接进入。">
   <link rel="icon" type="image/png" href="../swiftshot/swiftshot-icon.png?v=20260621-swiftshot-wiki-v4">
-  <link rel="stylesheet" href="../swiftshot/wiki.css?v=20260622-nav-faq-log">
+  <link rel="stylesheet" href="../swiftshot/wiki.css?v=20260622-ref-layout">
   <script>
     (() => {
       const key = 'swiftshot-wiki-theme';
@@ -28,7 +28,7 @@
     })();
   </script>
 </head>
-<body>
+<body class="ss-ref-page">
   <header class="VPNav wiki-nav">
     <div class="nav-shell">
       <a class="brand" href="../">
@@ -67,7 +67,7 @@
     </aside>
     <main id="VPContent" class="content">
       <article class="doc wiki-doc">
-        <p class="eyebrow">核心功能教程</p><h1>长截图与区域录屏</h1><p class="lead">长截图用于完整页面，区域录屏用于教程演示；两个入口都可以从截图选区直接进入。</p><section class="card wiki-doc-card"><h2>长截图推荐流程</h2><ol><li>先框选要长截图的窗口或页面区域。</li><li>点击长截图或按 <code>L</code>。</li><li>自动模式会预检目标窗口并滚动；手动模式可边滚动边追加分段。</li><li>完成后 SwiftShot 会拼接并修复常见的横向拼接线。</li></ol></section><section class="card wiki-doc-card"><h2>避免拼接线</h2><ul><li>开始后不要移动目标窗口。</li><li>滚动时等待页面稳定，不要过快连滚。</li><li>遇到吸顶栏/浮层页面，优先使用手动长截图。</li><li>如果仍有横线，重新截一张并反馈图给我按实际位置继续优化。</li></ul></section><section class="card wiki-doc-card"><h2>区域录屏</h2><ol><li>截图界面框选区域后点击录屏或按 <code>V</code>。</li><li>在设置页选择 MP4/MOV、HEVC/H.264、帧率、清晰度和是否显示鼠标。</li><li>需要声音时开启麦克风或系统录音权限。</li><li>录制完成后在默认录屏目录找到文件。</li></ol></section><section class="card wiki-doc-card"><h2>权限提醒</h2><p>录屏需要屏幕录制权限；系统声音需要系统录音相关权限。SwiftShot 的权限窗口会提供可拖动 App 卡片，不用在系统设置里点加号一个个找。</p></section>
+<section class="ss-ref-hero"><div class="ss-ref-shell ss-ref-hero-grid"><div class="ss-ref-copy ss-ref-reveal"><p class="ss-ref-eyebrow">LONGSHOT / RECORDING</p><h1>长截图与区域录屏 <span class="grad-text">放进同一套工作流</span></h1><p class="ss-ref-lede">从当前截图选区进入长截图或录屏，减少重新框选，适合教程、页面反馈和功能演示。</p><div class="ss-ref-actions"><a class="ss-btn ss-btn-primary" href="#longshot-flow">长截图流程</a><a class="ss-btn ss-btn-ghost" href="#recording">区域录屏</a></div><div class="ss-ref-meta"><span>长截图</span><span>区域录屏</span><span>系统录音</span></div></div><div class="ss-ref-visual"><div class="ss-demo-card ss-ref-reveal"><div class="ss-mac-titlebar"><span class="ss-mac-lights"><i></i><i></i><i></i></span>Longshot & Recording</div><div class="ss-demo-stage"><div class="ss-demo-app"><div class="ss-demo-side"><span class="ss-bar lg w60"></span><span class="ss-bar w80"></span><span class="ss-bar w70"></span><span class="ss-demo-shot"></span></div><div class="ss-demo-main"><span class="ss-bar lg w60"></span><span class="ss-bar w90"></span><span class="ss-bar w80"></span><span class="ss-bar w70"></span><span class="ss-demo-shot"></span></div></div><div class="ss-capture-rect"><i></i><i></i><i></i><i></i><span class="ss-dim-pill">1173 × 770 px</span></div><div class="ss-toolbar-demo"><span class="ss-tool-dot on">T</span><span class="ss-tool-dot">↗</span><span class="ss-tool-dot">▦</span><span class="ss-tool-dot">OCR</span></div></div></div></div></div></section><section class="ss-feature-section" id="longshot-flow"><div class="ss-ref-shell"><div class="ss-doc-grid ss-ref-reveal"><div class="ss-doc-copy"><h2>长截图推荐流程</h2><p>先框选滚动区域，再进入长截图。页面稳定后开始滚动拼接。</p><ul class="ss-points"><li>自动长截图适合普通长页面。</li><li>页面有吸顶栏/悬浮按钮时优先手动长截图。</li><li>不要移动窗口，滚动后等页面稳定。</li></ul></div><div class="ss-doc-visual"><div class="ss-demo-card ss-ref-reveal"><div class="ss-mac-titlebar"><span class="ss-mac-lights"><i></i><i></i><i></i></span>Scrolling capture</div><div class="ss-demo-stage"><div class="ss-demo-app"><div class="ss-demo-side"><span class="ss-bar lg w60"></span><span class="ss-bar w80"></span><span class="ss-bar w70"></span><span class="ss-demo-shot"></span></div><div class="ss-demo-main"><span class="ss-bar lg w60"></span><span class="ss-bar w90"></span><span class="ss-bar w80"></span><span class="ss-bar w70"></span><span class="ss-demo-shot"></span></div></div><div class="ss-capture-rect"><i></i><i></i><i></i><i></i><span class="ss-dim-pill">1173 × 770 px</span></div><div class="ss-scan-line"></div><div class="ss-toolbar-demo"><span class="ss-tool-dot on">T</span><span class="ss-tool-dot">↗</span><span class="ss-tool-dot">▦</span><span class="ss-tool-dot">OCR</span></div></div></div></div></div><div class="ss-doc-grid flip ss-ref-reveal"><div class="ss-doc-copy"><h2>避免拼接线</h2><p>长截图已针对拼接线、重叠错位和边缘线做持续修复。</p><ul class="ss-points"><li>拼接前保持窗口稳定。</li><li>复杂网页尽量关闭悬浮工具条。</li><li>如果还有横线，按真实位置继续调修复半径。</li></ul></div><div class="ss-doc-visual"><div class="ss-history-vis ss-ref-reveal"><div class="ss-history-search">搜索截图、录屏、OCR 文本</div><div class="ss-history-grid"><div class="ss-history-cell"><span class="ss-history-type">PNG</span></div><div class="ss-history-cell vid"><span class="ss-history-type">MP4</span></div><div class="ss-history-cell gif"><span class="ss-history-type">GIF</span></div><div class="ss-history-cell"><span class="ss-history-type">OCR</span></div><div class="ss-history-cell vid"><span class="ss-history-type">REC</span></div><div class="ss-history-cell"><span class="ss-history-type">PIN</span></div></div></div></div></div><div class="ss-doc-grid ss-ref-reveal"><div class="ss-doc-copy"><h2>区域录屏</h2><p>对当前选区开始区域录屏，可用于项目演示和功能说明。</p><ul class="ss-points"><li>V 对当前选区开始区域录屏。</li><li>系统录音只在需要录系统声音时开启。</li><li>录屏文件保存到默认录屏目录。</li></ul></div><div class="ss-doc-visual"><div class="ss-cloud-vis ss-ref-reveal"><div class="ss-cloud-card"><div class="ss-qa-thumb"><span class="ss-bar lg w60"></span><span class="ss-bar w90"></span><span class="ss-bar w80"></span><span class="ss-demo-shot"></span></div><div class="ss-qa-corners"><span>↗</span><span class="on">✓</span></div></div><div class="ss-cloud-toast"><span>LINK</span><div><strong>Link copied</strong><span class="ss-cloud-url">swiftshot.app/s/8F2K</span></div></div></div></div></div></div></section>
       </article>
       <aside class="doc-aside" aria-label="本页目录"><div class="doc-aside-container"><nav class="doc-outline" aria-labelledby="doc-outline-title"><div class="doc-outline-content"><div class="outline-marker" aria-hidden="true"></div><div class="outline-title" id="doc-outline-title" role="heading" aria-level="2">本页目录</div><ul class="doc-outline-list" data-page-outline></ul></div></nav></div></aside>
     </main>
@@ -121,7 +121,8 @@
     })();
   </script>
   <script src="../swiftshot/code-copy.js?v=20260621-swiftshot-wiki-v4" defer></script>
-  <script src="../swiftshot/floating-nav.js?v=20260622-floating-nav" defer></script>
+  <script src="../swiftshot/floating-nav.js?v=20260622-ref-layout" defer></script>
+  <script src="../swiftshot/reference-effects.js?v=20260622-ref-layout" defer></script>
   <script src="../swiftshot/top-nav-indicator.js?v=20260621-swiftshot-wiki-v4" defer></script>
 </body>
 </html>
