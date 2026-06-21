@@ -1352,3 +1352,130 @@ html.dark .doc-outline-content,
 @media(max-width:1180px){.wiki-hero-shell{grid-template-columns:1fr;padding-top:52px}.wiki-hero-copy{text-align:center}.wiki-hero-copy .lead{text-align:center;margin-left:auto;margin-right:auto}.wiki-hero-actions,.wiki-stat-row{justify-content:center}.wiki-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wiki-two-col{grid-template-columns:1fr}}
 @media(max-width:760px){.wiki-hero-shell{padding:40px 18px}.wiki-hero-copy h1{font-size:38px}.wiki-section{padding-left:18px;padding-right:18px}.wiki-feature-grid,.wiki-mini-grid{grid-template-columns:1fr}.wiki-hero-visual{border-radius:22px;padding:7px}.wiki-hero-visual img{border-radius:17px}.wiki-hero-actions a{width:100%}.has-sidebar .wiki-doc{max-width:100%}.pro-screenshot{border-radius:18px!important}}
 @media(prefers-reduced-motion:reduce){.wiki-hero-actions a,.wiki-feature-card{transition:none!important}}
+
+/* 20260621 Wiki readable card typography pass
+   Fix tutorial text nearly touching / crossing card edges on wide screens. */
+.wiki-doc .wiki-doc-card{
+  position:relative;
+  margin:34px 0;
+  padding:34px 40px 36px;
+  border:1px solid color-mix(in srgb,var(--vp-c-brand-1) 14%,var(--vp-c-divider));
+  border-radius:26px;
+  background:
+    linear-gradient(145deg,color-mix(in srgb,var(--vp-c-bg-elv) 94%,transparent),color-mix(in srgb,var(--vp-c-bg-soft) 86%,transparent)),
+    radial-gradient(circle at 94% 12%,rgba(96,165,250,.08),transparent 32%);
+  box-shadow:0 22px 62px -48px rgba(15,23,42,.40),inset 0 1px 0 rgba(255,255,255,.48);
+  overflow:hidden;
+}
+.wiki-doc .wiki-doc-card h2{
+  margin:0 0 20px;
+  padding:0;
+  font-size:25px;
+  line-height:34px;
+  letter-spacing:-.018em;
+  text-wrap:balance;
+}
+.wiki-doc .wiki-doc-card p,
+.wiki-doc .wiki-doc-card li{
+  max-width:72ch;
+  color:var(--vp-c-text-2);
+  font-size:16px;
+  line-height:30px;
+  letter-spacing:-.006em;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  text-wrap:pretty;
+}
+.wiki-doc .wiki-doc-card p{
+  margin:0;
+}
+.wiki-doc .wiki-doc-card p + p{
+  margin-top:12px;
+}
+.wiki-doc .wiki-doc-card strong{
+  color:var(--vp-c-text-1);
+  font-weight:760;
+}
+.wiki-doc .wiki-doc-card ol,
+.wiki-doc .wiki-doc-card ul{
+  display:grid;
+  gap:10px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.wiki-doc .wiki-doc-card ol{
+  counter-reset:wiki-step;
+}
+.wiki-doc .wiki-doc-card ol > li,
+.wiki-doc .wiki-doc-card ul > li{
+  position:relative;
+  margin:0;
+  min-height:28px;
+  padding-left:34px;
+}
+.wiki-doc .wiki-doc-card ol > li{
+  counter-increment:wiki-step;
+}
+.wiki-doc .wiki-doc-card ol > li::before{
+  content:counter(wiki-step);
+  position:absolute;
+  left:0;
+  top:3px;
+  display:grid;
+  place-items:center;
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  background:var(--vp-c-brand-soft);
+  color:var(--vp-c-brand-1);
+  font-size:12px;
+  line-height:1;
+  font-weight:800;
+}
+.wiki-doc .wiki-doc-card ul > li::before{
+  content:"";
+  position:absolute;
+  left:8px;
+  top:13px;
+  width:7px;
+  height:7px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  box-shadow:0 0 0 4px var(--vp-c-brand-soft);
+}
+.wiki-doc .wiki-doc-card code{
+  white-space:nowrap;
+}
+.dark .wiki-doc .wiki-doc-card{
+  background:
+    linear-gradient(145deg,rgba(32,33,39,.88),rgba(22,22,26,.66)),
+    radial-gradient(circle at 94% 12%,rgba(96,165,250,.10),transparent 32%);
+  border-color:rgba(255,255,255,.09);
+  box-shadow:0 24px 70px -50px rgba(0,0,0,.70),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.dark .wiki-doc .wiki-doc-card p,
+.dark .wiki-doc .wiki-doc-card li{
+  color:var(--vp-c-text-2);
+}
+@media(max-width:760px){
+  .wiki-doc .wiki-doc-card{
+    margin:26px 0;
+    padding:26px 22px 28px;
+    border-radius:22px;
+  }
+  .wiki-doc .wiki-doc-card h2{
+    font-size:22px;
+    line-height:30px;
+  }
+  .wiki-doc .wiki-doc-card p,
+  .wiki-doc .wiki-doc-card li{
+    max-width:none;
+    font-size:15.5px;
+    line-height:28px;
+  }
+  .wiki-doc .wiki-doc-card ol > li,
+  .wiki-doc .wiki-doc-card ul > li{
+    padding-left:30px;
+  }
+}
