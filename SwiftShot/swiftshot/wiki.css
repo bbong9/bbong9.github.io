@@ -1479,3 +1479,164 @@ html.dark .doc-outline-content,
     padding-left:30px;
   }
 }
+
+/* 20260621 Wiki home stacked hero: title / image / action copy vertical layout */
+.wiki-home-content .wiki-hero-stacked{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:28px;
+  max-width:1380px;
+  margin:0 auto;
+  padding:92px 32px 66px;
+}
+.wiki-hero-stacked .wiki-hero-copy{
+  width:min(1120px,100%);
+  text-align:center;
+}
+.wiki-hero-stacked .wiki-hero-copy .eyebrow{
+  margin:0 0 18px;
+  letter-spacing:.14em;
+}
+.wiki-hero-stacked .wiki-hero-copy h1{
+  max-width:1120px;
+  margin:0 auto;
+  font-size:clamp(52px,6.2vw,96px);
+  line-height:.98;
+  letter-spacing:-.062em;
+  text-align:center;
+  text-wrap:balance;
+}
+.wiki-hero-stacked .wiki-hero-visual{
+  width:min(1180px,100%);
+  margin:8px auto 0;
+  padding:12px;
+  border-radius:36px;
+}
+.wiki-hero-stacked .wiki-hero-visual img{
+  border-radius:26px;
+}
+.wiki-hero-bottom{
+  display:grid;
+  justify-items:center;
+  gap:20px;
+  width:min(900px,100%);
+  margin:4px auto 0;
+  text-align:center;
+}
+.wiki-hero-bottom .lead,
+.wiki-hero-stacked .wiki-hero-copy .lead{
+  max-width:860px;
+  margin:0;
+  text-align:center;
+  color:var(--vp-c-text-2);
+  font-size:19px;
+  line-height:32px;
+  text-wrap:pretty;
+}
+.wiki-hero-bottom .wiki-hero-actions,
+.wiki-hero-bottom .wiki-stat-row{
+  justify-content:center;
+  margin:0;
+}
+.wiki-hero-bottom .wiki-stat-row{
+  margin-top:2px;
+}
+@media(max-width:1180px){
+  .wiki-home-content .wiki-hero-stacked{
+    padding-top:62px;
+    gap:24px;
+  }
+  .wiki-hero-stacked .wiki-hero-copy h1{
+    font-size:clamp(42px,8.5vw,76px);
+  }
+}
+@media(max-width:760px){
+  .wiki-home-content .wiki-hero-stacked{
+    padding:42px 18px 52px;
+    gap:22px;
+  }
+  .wiki-hero-stacked .wiki-hero-copy h1{
+    font-size:40px;
+    line-height:1.04;
+  }
+  .wiki-hero-bottom .lead{
+    font-size:16.5px;
+    line-height:28px;
+  }
+  .wiki-hero-stacked .wiki-hero-visual{
+    border-radius:22px;
+    padding:7px;
+  }
+  .wiki-hero-stacked .wiki-hero-visual img{
+    border-radius:17px;
+  }
+}
+
+/* 20260621 Wiki home stacked hero compact tuning
+   Keep title, screenshot and start actions in a clear top/middle/bottom rhythm. */
+.wiki-home-content .wiki-hero-stacked{
+  gap:24px;
+  padding-top:82px;
+  padding-bottom:56px;
+}
+.wiki-hero-stacked .wiki-hero-copy{
+  width:min(1440px,100%);
+}
+.wiki-hero-stacked .wiki-hero-copy h1{
+  max-width:1440px;
+  font-size:clamp(46px,4.8vw,76px);
+  line-height:1.04;
+  letter-spacing:-.054em;
+}
+.wiki-hero-stacked .wiki-hero-visual{
+  width:min(1060px,94%);
+  margin-top:0;
+}
+.wiki-hero-bottom{
+  width:min(980px,100%);
+  gap:18px;
+  margin-top:0;
+}
+.wiki-hero-bottom .lead{
+  max-width:920px;
+}
+@media(min-width:1680px){
+  .wiki-hero-stacked .wiki-hero-copy h1{
+    max-width:1520px;
+    font-size:76px;
+  }
+}
+@media(max-width:760px){
+  .wiki-home-content .wiki-hero-stacked{
+    padding-top:42px;
+    padding-bottom:46px;
+  }
+  .wiki-hero-stacked .wiki-hero-copy h1{
+    font-size:38px;
+  }
+}
+
+/* 20260621 Wiki home stacked hero title/order correction */
+.wiki-hero-stacked .wiki-title-line{
+  display:block;
+}
+.wiki-hero-stacked .wiki-title-line:first-child{
+  white-space:nowrap;
+}
+.wiki-hero-stacked .wiki-title-line + .wiki-title-line{
+  margin-top:.03em;
+}
+.wiki-hero-bottom{
+  gap:14px;
+}
+.wiki-hero-bottom .lead{
+  margin-top:4px;
+  font-size:17px;
+  line-height:30px;
+}
+@media(max-width:980px){
+  .wiki-hero-stacked .wiki-title-line:first-child{
+    white-space:normal;
+  }
+}
