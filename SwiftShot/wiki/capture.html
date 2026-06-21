@@ -1,14 +1,13 @@
 <!doctype html>
-<html lang="zh-CN" data-root-prefix="../" data-asset-prefix="../swiftshot/">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>截图流程 | SwiftShot Wiki</title>
-  <meta name="description" content="SwiftShot Wiki - 截图流程">
-  <link rel="icon" type="image/png" href="../swiftshot/swiftshot-icon.png?v=20260618-swiftshot-wiki-v1">
-  <link rel="stylesheet" href="../swiftshot/wiki.css?v=20260618-swiftshot-wiki-v1">
+  <title>截图工作流 | SwiftShot Wiki</title>
+  <meta name="description" content="把截图流程讲清楚：从快捷键唤起、框选、标注，到复制、保存、OCR 和贴图。">
+  <link rel="icon" type="image/png" href="../swiftshot/swiftshot-icon.png?v=20260621-swiftshot-wiki-v2">
+  <link rel="stylesheet" href="../swiftshot/wiki.css?v=20260621-swiftshot-wiki-v2">
   <script>
-
     (() => {
       const key = 'swiftshot-wiki-theme';
       if (localStorage.getItem(key) === 'dark') document.documentElement.classList.add('dark');
@@ -25,216 +24,54 @@
           sync();
         });
         sync();
-
-        const searchButton = document.querySelector('.DocSearch-Button');
-        const dialog = document.querySelector('[data-search-dialog]');
-        const input = document.querySelector('[data-search-input]');
-        const results = document.querySelector('[data-search-results]');
-        const clearButton = document.querySelector('[data-search-clear]');
-        const closeTargets = document.querySelectorAll('[data-search-close]');
-        let searchIndexPromise;
-        let searchItems = [];
-        let selectedIndex = -1;
-        let lastResults = [];
-        const rootPrefix = document.documentElement.dataset.rootPrefix || './';
-        const assetPrefix = document.documentElement.dataset.assetPrefix || 'swiftshot/';
-        const normalize = (value) => String(value || '').trim().toLocaleLowerCase();
-        const escapeClientHtml = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[char]));
-        const resolveSearchHref = (href) => {
-          if (!href) return '';
-          if (/^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(href) || href.startsWith('#')) return href;
-          return new URL(rootPrefix + href.replace(/^\.\//, ''), window.location.href).href;
-        };
-        const loadSearchIndex = () => {
-          if (!searchIndexPromise) {
-            searchIndexPromise = fetch(new URL(assetPrefix + 'search-index.json?v=20260618-swiftshot-wiki-v1', window.location.href).href)
-              .then((response) => response.ok ? response.json() : [])
-              .then((items) => Array.isArray(items) ? items.map((item) => ({ ...item, href: resolveSearchHref(item.href) })) : [])
-              .catch(() => []);
-          }
-          return searchIndexPromise;
-        };
-        const chunks = (query) => normalize(query).split(/\s+/).filter(Boolean);
-        const highlight = (text, terms) => {
-          let escaped = escapeClientHtml(text);
-          terms.forEach((term) => {
-            const safe = escapeClientHtml(term).replace(new RegExp('[.*+?^\\x24{}()|[\\]\\\\]', 'g'), '\\$&');
-            if (!safe) return;
-            escaped = escaped.replace(new RegExp(safe, 'gi'), (match) => '<mark>' + match + '</mark>');
-          });
-          return escaped;
-        };
-        const scoreItem = (item, terms) => {
-          const title = normalize(item.title);
-          const breadcrumb = normalize((item.breadcrumbs || []).join(' '));
-          const excerpt = normalize(item.excerpt);
-          const text = normalize(item.text);
-          let score = 0;
-          for (const term of terms) {
-            if (title === term) score += 120;
-            else if (title.startsWith(term)) score += 90;
-            else if (title.includes(term)) score += 70;
-            if (breadcrumb.includes(term)) score += 42;
-            if (excerpt.includes(term)) score += 24;
-            if (text.includes(term)) score += 12;
-            if (!title.includes(term) && !breadcrumb.includes(term) && !excerpt.includes(term) && !text.includes(term)) return 0;
-          }
-          return score;
-        };
-        const selectResult = (index) => {
-          selectedIndex = index;
-          results?.querySelectorAll('.result').forEach((node, nodeIndex) => {
-            node.classList.toggle('selected', nodeIndex === selectedIndex);
-            if (nodeIndex === selectedIndex) node.scrollIntoView({ block: 'nearest' });
-          });
-        };
-        const renderResults = (query) => {
-          const terms = chunks(query);
-          if (!results) return;
-          if (!terms.length) {
-            lastResults = [];
-            selectedIndex = -1;
-            results.hidden = true;
-            results.innerHTML = '';
-            clearButton?.setAttribute('disabled', '');
-            return;
-          }
-          clearButton?.removeAttribute('disabled');
-          lastResults = searchItems.map((item) => ({ ...item, score: scoreItem(item, terms) }))
-            .filter((item) => item.score > 0)
-            .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, 'zh-CN'))
-            .slice(0, 24);
-          results.hidden = false;
-          if (!lastResults.length) {
-            selectedIndex = -1;
-            results.innerHTML = '<div class="no-results">No results for "' + escapeClientHtml(query) + '"</div>';
-            return;
-          }
-          results.innerHTML = lastResults.map((item, index) => {
-            const parts = (item.breadcrumbs || []).map((part, partIndex) => {
-              const main = partIndex === (item.breadcrumbs || []).length - 1 ? ' main' : '';
-              const icon = partIndex === 0 ? '<span class="title-icon">#</span>' : '<span class="title-icon">›</span>';
-              return '<span class="title' + main + '">' + icon + '<span>' + highlight(part, terms) + '</span></span>';
-            }).join('');
-            return '<button type="button" class="result' + (index === 0 ? ' selected' : '') + '" data-search-result="' + index + '"><div><div class="titles">' + parts + '</div><div class="excerpt-wrapper"><div class="excerpt">' + highlight(item.excerpt, terms) + '</div><div class="excerpt-gradient-bottom"></div></div></div></button>';
-          }).join('');
-          selectedIndex = 0;
-        };
-        const openSearch = async (seed = '') => {
-          if (!dialog || !input) return;
-          searchItems = await loadSearchIndex();
-          dialog.hidden = false;
-          document.documentElement.classList.add('search-open');
-          input.value = seed;
-          renderResults(input.value);
-          requestAnimationFrame(() => input.focus());
-        };
-        const closeSearch = () => {
-          if (!dialog || dialog.hidden) return;
-          dialog.hidden = true;
-          document.documentElement.classList.remove('search-open');
-          input.value = '';
-          renderResults('');
-          searchButton?.focus();
-        };
-        searchButton?.addEventListener('click', () => openSearch());
-        closeTargets.forEach((target) => target.addEventListener('click', closeSearch));
-        clearButton?.addEventListener('click', () => { input.value = ''; renderResults(''); input.focus(); });
-        input?.addEventListener('input', () => renderResults(input.value));
-        results?.addEventListener('click', (event) => {
-          const item = event.target.closest('[data-search-result]');
-          if (!item) return;
-          const result = lastResults[Number(item.dataset.searchResult)];
-          if (result?.href) window.location.href = result.href;
-        });
-        document.addEventListener('keydown', (event) => {
-          const isOpen = dialog && !dialog.hidden;
-          const keyName = event.key.toLowerCase();
-          if ((event.metaKey || event.ctrlKey) && keyName === 'k') { event.preventDefault(); openSearch(); return; }
-          if (!isOpen && event.key === '/' && !/input|textarea|select/i.test(document.activeElement?.tagName || '')) { event.preventDefault(); openSearch(); return; }
-          if (!isOpen) return;
-          if (event.key === 'Escape') { event.preventDefault(); closeSearch(); }
-          else if (event.key === 'ArrowDown' && lastResults.length) { event.preventDefault(); selectResult((selectedIndex + 1) % lastResults.length); }
-          else if (event.key === 'ArrowUp' && lastResults.length) { event.preventDefault(); selectResult((selectedIndex - 1 + lastResults.length) % lastResults.length); }
-          else if (event.key === 'Enter' && selectedIndex >= 0 && lastResults[selectedIndex]?.href) { event.preventDefault(); window.location.href = lastResults[selectedIndex].href; }
-        });
       });
     })();
-
   </script>
 </head>
 <body>
-  <header class="VPNav">
+  <header class="VPNav wiki-nav">
     <div class="nav-shell">
       <a class="brand" href="../">
-        <span class="brand-mark"><img decoding="async" src="../swiftshot/swiftshot-icon.png?v=20260618-swiftshot-wiki-v1" alt="" width="28" height="28"></span>
+        <span class="brand-mark"><img decoding="async" src="../swiftshot/swiftshot-icon.png?v=20260621-swiftshot-wiki-v2" alt="" width="28" height="28"></span>
         <span>SwiftShot Wiki</span>
       </a>
       <div class="nav-right">
-        <div class="VPNavBarSearch search">
-          <div id="local-search">
-            <button type="button" aria-label="Search" aria-keyshortcuts="/ control+k meta+k" class="DocSearch DocSearch-Button">
-              <span class="DocSearch-Button-Container"><span class="vpi-search DocSearch-Search-Icon"></span><span class="DocSearch-Button-Placeholder">Search...</span></span>
-              <span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key">⌘&nbsp;K</kbd></span>
-            </button>
-          </div>
-        </div>
-        <nav class="top-menu" aria-label="主导航"><a class="" href="../">首页</a><a class="" href="../wiki/quickstart.html">快速开始</a><a class="active" href="../wiki/capture.html">功能教程</a><a class="" href="../wiki/troubleshooting.html">排障</a><a class="" href="../wiki/changelog.html">更新日志</a></nav>
-        <div class="VPNavBarAppearance appearance">
-          <button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-label="外观" aria-checked="false" data-theme-toggle>
-            <span class="check"><span class="icon"><span class="vpi-sun sun"></span><span class="vpi-moon moon"></span></span></span>
-          </button>
-        </div>
+        <nav class="top-menu" aria-label="主导航"><a class="" href="../">首页</a><a class="" href="../wiki/quickstart.html">快速开始</a><a class="active" href="../wiki/capture.html">截图工作流</a><a class="" href="../wiki/settings-permissions.html">设置</a><a class="" href="../wiki/troubleshooting.html">排障</a></nav>
+        <div class="VPNavBarAppearance appearance"><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-label="外观" aria-checked="false" data-theme-toggle><span class="check"><span class="icon"><span class="vpi-sun sun"></span><span class="vpi-moon moon"></span></span></span></button></div>
       </div>
     </div>
   </header>
-
-  <div class="VPLocalSearchBox" data-search-dialog hidden>
-    <div class="backdrop" data-search-close></div>
-    <div class="shell" role="dialog" aria-modal="true" aria-label="Search">
-      <label class="search-bar">
-        <span class="vpi-search local-search-icon search-icon" aria-hidden="true"></span>
-        <input class="search-input" data-search-input type="search" placeholder="Search" autocomplete="off" spellcheck="false">
-        <span class="search-actions after">
-          <button class="toggle-layout-button detailed-list" type="button" aria-label="切换搜索结果布局" data-search-layout>
-            <span class="vpi-layout-list navigate-icon" aria-hidden="true"></span>
-          </button>
-          <button class="clear-button" type="button" aria-label="清空搜索" data-search-clear disabled>
-            <span class="vpi-delete-left navigate-icon" aria-hidden="true"></span>
-          </button>
-        </span>
-      </label>
-      <div class="results" data-search-results hidden></div>
-      <div class="search-keyboard-shortcuts" aria-hidden="true">
-        <span><kbd>↑</kbd><kbd>↓</kbd> to navigate</span>
-        <span><kbd>↵</kbd> to select</span>
-        <span><kbd>esc</kbd> to close</span>
-      </div>
-    </div>
-  </div>
-
-
   <div class="layout has-sidebar">
     <aside class="sidebar" aria-label="侧边栏导航">
-      <nav class="sidebar-tree" id="VPSidebarNav" aria-label="文档导航"><section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">入门</h2></div><div class="items"><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../"><p class="text">总览</p></a></div></div><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/quickstart.html"><p class="text">快速开始</p></a></div></div><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/install.html"><p class="text">安装与构建</p></a></div></div></div></section><section class="sidebar-item level-0 has-active"><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">功能教程</h2></div><div class="items"><div class="sidebar-item level-1 is-link is-active has-active"><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/capture.html"><p class="text">截图流程</p></a></div></div><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/editor.html"><p class="text">编辑标注</p></a></div></div><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/ocr-translation.html"><p class="text">OCR 与翻译</p></a></div></div><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/longshot-recording.html"><p class="text">长截图与录屏</p></a></div></div></div></section><section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">配置维护</h2></div><div class="items"><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/settings-permissions.html"><p class="text">设置与权限</p></a></div></div><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/history-privacy.html"><p class="text">历史与隐私</p></a></div></div><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/release.html"><p class="text">发布打包</p></a></div></div></div></section><section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">排障</h2></div><div class="items"><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/troubleshooting.html"><p class="text">常见问题排障</p></a></div></div><div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/changelog.html"><p class="text">更新日志</p></a></div></div></div></section></nav>
+      <nav class="sidebar-tree" id="VPSidebarNav" aria-label="文档导航">
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">入门</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../"><p class="text">总览</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/quickstart.html"><p class="text">快速开始</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/install.html"><p class="text">安装与首次授权</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 has-active"><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">核心功能教程</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link is-active has-active"><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/capture.html"><p class="text">截图工作流</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/editor.html"><p class="text">编辑标注与打码</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/ocr-translation.html"><p class="text">OCR 与翻译</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/longshot-recording.html"><p class="text">长截图与录屏</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">设置与隐私</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/settings-permissions.html"><p class="text">设置与权限</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/history-privacy.html"><p class="text">历史与隐私</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">帮助</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/troubleshooting.html"><p class="text">常见问题排障</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/changelog.html"><p class="text">更新日志</p></a></div></div>
+</div></section>
+      </nav>
     </aside>
     <main id="VPContent" class="content">
-      <article class="doc">
-        <p class="eyebrow">功能教程</p>
-        <h1>截图流程</h1>
-        <p class="lead">截图流程从菜单栏或全局快捷键进入 Overlay，核心目标是快、准、稳，并避免把自身 UI 截进结果。</p>
-
-        <section class="card"><h2>入口</h2><ul><li>菜单栏：点击 SwiftShot 图标，选择“开始截图”。</li><li>全局快捷键：以设置页“打开截图界面”的当前注册值为准。</li><li>启动控制面板：权限不足或菜单栏不可见时，可以从控制面板点击“开始截图”。</li></ul></section>
-        <section class="card"><h2>Overlay 行为</h2><ol><li>覆盖所有显示器，支持 Retina/非 Retina 混用。</li><li>鼠标悬停窗口时高亮候选窗口。</li><li>拖拽可创建自由选区，方向键可微调，Shift 可固定比例。</li><li>框选完成后显示底部工具栏，工具栏在截图内容外侧，不进入导出图。</li><li>双击选区可快速复制并保存。</li></ol></section>
-        <section class="card"><h2>常用快捷操作</h2><ul><li><code>Esc</code>：退出当前截图。</li><li><code>Enter</code>：确认/复制当前截图。</li><li><code>Cmd + C</code>：复制当前截图。</li><li><code>Cmd + S</code>：打开保存面板。</li><li><code>L</code>：从当前选区进入长截图。</li></ul></section>
-        <section class="card"><h2>验证方式</h2><ul><li>截图结果不包含蓝框、工具栏、遮罩、尺寸浮标。</li><li>Retina 屏幕上显示的像素尺寸与导出图片像素一致。</li><li>多显示器间移动鼠标和窗口时，高亮与截图区域不偏移。</li></ul></section>
-        <section class="card"><h2>风险提示</h2><ul><li>窗口识别基于系统窗口信息，圆角、透明区域或遮挡后的可见轮廓不一定完全等同肉眼看到的边界。</li><li>全屏 Space、外接屏热插拔和混合缩放需要真实设备 QA。</li></ul></section>
-
+      <article class="doc wiki-doc">
+        <p class="eyebrow">核心功能教程</p><h1>截图工作流</h1><p class="lead">把截图流程讲清楚：从快捷键唤起、框选、标注，到复制、保存、OCR 和贴图。</p><figure class="screenshot pro-screenshot"><img loading="lazy" decoding="async" src="../swiftshot/screenshots/capture-workflow-clean.png?v=20260621-swiftshot-wiki-v2" alt="截图工作流示意：框选区域后，工具栏提供标注、马赛克、OCR、保存和复制。"><figcaption>截图工作流示意：框选区域后，工具栏提供标注、马赛克、OCR、保存和复制。</figcaption></figure><section class="card wiki-doc-card"><h2>入口</h2><ul><li><strong>全局快捷键：</strong>在设置页“快捷键”里查看或修改，当前本机示例为 <code>⌥A</code>。</li><li><strong>菜单栏：</strong>点击 SwiftShot 图标，选择“截图”。</li><li><strong>截图界面功能键：</strong>截图框出现后才生效，例如 <code>L</code> 长截图、<code>V</code> 录屏、<code>O</code> OCR。</li></ul></section><section class="card wiki-doc-card"><h2>框选与窗口识别</h2><ol><li>拖拽鼠标创建自由选区。</li><li>鼠标移动到窗口上时会高亮候选窗口，适合快速截取 App 窗口。</li><li>选区完成后，尺寸浮标显示当前像素尺寸，底部工具栏出现在截图内容外侧。</li></ol></section><section class="card wiki-doc-card"><h2>工具栏怎么用</h2><div class="wiki-mini-grid"><div><b>标注</b><span>矩形、箭头、画笔、文本、序号。</span></div><div><b>隐私</b><span>灰白块状马赛克、模糊、橡皮擦。</span></div><div><b>识别</b><span>OCR、翻译，直接使用当前框选范围。</span></div><div><b>导出</b><span>复制、保存、贴图、拖拽导出。</span></div></div></section><section class="card wiki-doc-card"><h2>常用快捷键</h2><ul><li><code>Esc</code>：退出当前截图。</li><li><code>Enter</code> / <code>⌘C</code>：复制当前截图。</li><li><code>⌘S</code>：保存到文件。</li><li><code>L</code>：对当前选区进入长截图。</li><li><code>V</code>：对当前选区开始区域录屏。</li></ul></section>
       </article>
       <aside class="doc-aside" aria-label="本页目录"><div class="doc-aside-container"><nav class="doc-outline" aria-labelledby="doc-outline-title"><div class="doc-outline-content"><div class="outline-marker" aria-hidden="true"></div><div class="outline-title" id="doc-outline-title" role="heading" aria-level="2">本页目录</div><ul class="doc-outline-list" data-page-outline></ul></div></nav></div></aside>
     </main>
   </div>
-
   <script data-page-outline-script>
     (() => {
       const article = document.querySelector('article.doc');
@@ -245,7 +82,7 @@
       if (!headings.length) { aside.hidden = true; return; }
       const counts = new Map();
       const slugify = (text) => {
-        const raw = text.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\u4e00-\u9fff-]+/g, '').replace(/^-+|-+$/g, '') || 'section';
+        const raw = text.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w一-鿿-]+/g, '').replace(/^-+|-+$/g, '') || 'section';
         const count = counts.get(raw) || 0;
         counts.set(raw, count + 1);
         return count ? raw + '-' + count : raw;
@@ -266,34 +103,24 @@
       const setActive = () => {
         const threshold = window.scrollY + 128;
         let activeIndex = 0;
-        headings.forEach((heading, index) => {
-          if (heading.getBoundingClientRect().top + window.scrollY <= threshold) activeIndex = index;
-        });
+        headings.forEach((heading, index) => { if (heading.getBoundingClientRect().top + window.scrollY <= threshold) activeIndex = index; });
         links.forEach((link, index) => link.classList.toggle('active', index === activeIndex));
         const active = links[activeIndex];
         if (marker && active) {
           const content = marker.closest('.doc-outline-content');
           const activeRect = active.getBoundingClientRect();
           const contentRect = content ? content.getBoundingClientRect() : { top: 0 };
-          const markerHeight = marker.offsetHeight || 18;
-          const markerTop = activeRect.top - contentRect.top + (activeRect.height - markerHeight) / 2;
+          const markerTop = activeRect.top - contentRect.top + (activeRect.height - (marker.offsetHeight || 18)) / 2;
           marker.style.opacity = '1';
           marker.style.top = Math.max(0, Math.round(markerTop)) + 'px';
         }
       };
-      let outlineTicking = false;
-      const requestSetActive = () => {
-        if (outlineTicking) return;
-        outlineTicking = true;
-        window.requestAnimationFrame(() => { outlineTicking = false; setActive(); });
-      };
-      window.addEventListener('scroll', requestSetActive, { passive: true });
-      window.addEventListener('resize', requestSetActive);
+      window.addEventListener('scroll', () => requestAnimationFrame(setActive), { passive: true });
+      window.addEventListener('resize', setActive);
       setActive();
     })();
   </script>
-  <script src="../swiftshot/mouse-gradient-trail.js?v=20260618-swiftshot-wiki-v1" defer></script>
-  <script src="../swiftshot/code-copy.js?v=20260618-swiftshot-wiki-v1" defer></script>
-  <script src="../swiftshot/top-nav-indicator.js?v=20260618-swiftshot-wiki-v1" defer></script>
+  <script src="../swiftshot/code-copy.js?v=20260621-swiftshot-wiki-v2" defer></script>
+  <script src="../swiftshot/top-nav-indicator.js?v=20260621-swiftshot-wiki-v2" defer></script>
 </body>
 </html>
