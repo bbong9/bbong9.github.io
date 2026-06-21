@@ -1640,3 +1640,192 @@ html.dark .doc-outline-content,
     white-space:normal;
   }
 }
+
+/* 20260622 reference-style floating nav
+   Top state is transparent and merged into the page; after scrolling it shrinks
+   into a centered glass pill, matching the swiftshot.online interaction. */
+:root{
+  --wiki-float-nav-h:64px;
+  --wiki-float-nav-pill-h:54px;
+  --wiki-float-nav-top-max:1140px;
+  --wiki-float-nav-max:1064px;
+  --wiki-float-nav-ease:cubic-bezier(.2,.6,.2,1);
+  --wiki-float-nav-pill-bg:linear-gradient(180deg,rgba(255,255,255,.88) 0%,rgba(255,255,255,.68) 100%);
+  --wiki-float-nav-pill-border:rgba(255,255,255,.72);
+  --wiki-float-nav-pill-ring:rgba(203,214,238,.55);
+  --wiki-float-nav-pill-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 0 0 1px var(--wiki-float-nav-pill-ring),0 12px 32px rgba(50,70,120,.12);
+}
+html.dark,
+.dark{
+  --wiki-float-nav-pill-bg:linear-gradient(180deg,rgba(38,39,48,.86) 0%,rgba(25,26,33,.66) 100%);
+  --wiki-float-nav-pill-border:rgba(255,255,255,.14);
+  --wiki-float-nav-pill-ring:rgba(130,145,190,.22);
+  --wiki-float-nav-pill-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 0 1px var(--wiki-float-nav-pill-ring),0 14px 38px rgba(0,0,0,.24),0 0 28px rgba(92,115,231,.10);
+}
+.VPNav.wiki-nav{
+  position:fixed;
+  inset:0 0 auto;
+  z-index:100;
+  height:var(--wiki-float-nav-h);
+  padding:0;
+  pointer-events:none;
+  overflow:visible;
+  background:transparent!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  transition:padding .35s var(--wiki-float-nav-ease),height .35s var(--wiki-float-nav-ease);
+}
+.VPNav.wiki-nav::after{content:none!important;display:none!important}
+.VPNav.wiki-nav.is-floating{
+  height:calc(var(--wiki-float-nav-pill-h) + 10px);
+  padding:10px clamp(12px,3vw,24px) 0;
+}
+.VPNav.wiki-nav .nav-shell{
+  pointer-events:auto;
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  max-width:var(--wiki-float-nav-top-max);
+  height:var(--wiki-float-nav-h);
+  margin:0 auto;
+  padding:0 24px;
+  border:1px solid transparent;
+  border-radius:0;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  transition:height .35s var(--wiki-float-nav-ease),max-width .35s var(--wiki-float-nav-ease),padding .35s var(--wiki-float-nav-ease),border-radius .35s var(--wiki-float-nav-ease),background .35s var(--wiki-float-nav-ease),border-color .35s var(--wiki-float-nav-ease),box-shadow .35s var(--wiki-float-nav-ease),backdrop-filter .35s var(--wiki-float-nav-ease),-webkit-backdrop-filter .35s var(--wiki-float-nav-ease);
+}
+.VPNav.wiki-nav .nav-shell::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 38%);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .35s ease;
+}
+html.dark .VPNav.wiki-nav .nav-shell::before,
+.dark .VPNav.wiki-nav .nav-shell::before{background:linear-gradient(180deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,0) 46%)}
+.VPNav.wiki-nav.is-floating .nav-shell{
+  max-width:var(--wiki-float-nav-max);
+  height:var(--wiki-float-nav-pill-h);
+  padding:0 8px 0 16px;
+  border-radius:999px;
+  background:var(--wiki-float-nav-pill-bg)!important;
+  border-color:var(--wiki-float-nav-pill-border)!important;
+  box-shadow:var(--wiki-float-nav-pill-shadow)!important;
+  backdrop-filter:blur(20px) saturate(1.5)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(1.5)!important;
+}
+.VPNav.wiki-nav.is-floating .nav-shell::before{opacity:1}
+.VPNav.wiki-nav .brand{
+  position:relative;
+  z-index:1;
+  height:var(--wiki-float-nav-h);
+  gap:10px;
+  padding:0;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  color:var(--vp-c-text-1);
+  font-size:1.0313rem;
+  font-weight:700;
+  letter-spacing:-.02em;
+  transition:height .35s var(--wiki-float-nav-ease),font-size .35s var(--wiki-float-nav-ease);
+}
+.VPNav.wiki-nav .brand::before,.VPNav.wiki-nav .brand::after{content:none!important;display:none!important}
+.VPNav.wiki-nav.is-floating .brand{height:var(--wiki-float-nav-pill-h)}
+.VPNav.wiki-nav .brand-mark{width:28px;height:28px;border-radius:8px;background:transparent!important;box-shadow:none!important;overflow:visible}
+.VPNav.wiki-nav .brand-mark::after{content:none!important;display:none!important}
+.VPNav.wiki-nav .nav-right{position:relative;z-index:1;display:flex;align-items:center;gap:18px}
+@media(min-width:960px){
+  .VPNav.wiki-nav .top-menu,
+  html.dark .VPNav.wiki-nav .top-menu,
+  .dark .VPNav.wiki-nav .top-menu{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:2px;
+    padding:0;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+  .VPNav.wiki-nav .top-menu::before,.VPNav.wiki-nav .top-menu::after{content:none!important;display:none!important}
+  .VPNav.wiki-nav .top-menu a{
+    position:relative;
+    z-index:1;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height:34px;
+    padding:0 12px;
+    border-radius:10px;
+    background:transparent!important;
+    box-shadow:none!important;
+    color:#334155;
+    font-size:14px;
+    font-weight:500;
+    line-height:1;
+    transition:color .15s ease,background-color .15s ease,transform .18s ease;
+  }
+  .VPNav.wiki-nav .top-menu a:hover{
+    color:#070A12;
+    background:rgba(7,10,18,.05)!important;
+    transform:none;
+  }
+  .VPNav.wiki-nav .top-menu a.active{
+    color:var(--vp-c-brand-1)!important;
+    background:transparent!important;
+  }
+  html.dark .VPNav.wiki-nav .top-menu a,
+  .dark .VPNav.wiki-nav .top-menu a{color:color-mix(in srgb,var(--vp-c-text-1) 80%,transparent)}
+  html.dark .VPNav.wiki-nav .top-menu a:hover,
+  .dark .VPNav.wiki-nav .top-menu a:hover{color:var(--vp-c-text-1)}
+  html.dark .VPNav.wiki-nav .top-menu a:hover,
+  .dark .VPNav.wiki-nav .top-menu a:hover{background:rgba(255,255,255,.07)!important}
+  html.dark .VPNav.wiki-nav .top-menu a.active,
+  .dark .VPNav.wiki-nav .top-menu a.active{background:transparent!important}
+  .VPNav.wiki-nav .top-menu a.active::before,.VPNav.wiki-nav .top-menu a.active::after{content:none!important;display:none!important}
+}
+.VPNav.wiki-nav .VPSwitchAppearance{
+  position:relative;
+  z-index:1;
+  border-color:transparent!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  transition:background .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.VPNav.wiki-nav.is-floating .VPSwitchAppearance{
+  background:rgba(255,255,255,.34)!important;
+  border-color:rgba(203,214,238,.46)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55)!important;
+}
+html.dark .VPNav.wiki-nav.is-floating .VPSwitchAppearance,
+.dark .VPNav.wiki-nav.is-floating .VPSwitchAppearance{background:rgba(255,255,255,.08)!important;border-color:rgba(255,255,255,.12)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10)!important}
+@media(max-width:959px){
+  .VPNav.wiki-nav{position:sticky;height:var(--vp-nav-height);padding:0;pointer-events:auto;background:color-mix(in srgb,var(--vp-c-bg) 88%,transparent)!important;border-bottom:1px solid var(--vp-c-divider)!important;backdrop-filter:saturate(180%) blur(12px)!important;-webkit-backdrop-filter:saturate(180%) blur(12px)!important}
+  .VPNav.wiki-nav.is-floating{height:var(--vp-nav-height);padding:0}
+  .VPNav.wiki-nav .nav-shell,.VPNav.wiki-nav.is-floating .nav-shell{height:var(--vp-nav-height);max-width:var(--vp-layout-max-width);padding:0 20px;border:0!important;border-radius:0;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .VPNav.wiki-nav .brand,.VPNav.wiki-nav.is-floating .brand{height:var(--vp-nav-height)}
+}
+@media(max-width:520px){.VPNav.wiki-nav .nav-shell{padding:0 14px}.VPNav.wiki-nav .brand span:last-child{font-size:14px}}
+@media(prefers-reduced-motion:reduce){
+  .VPNav.wiki-nav,.VPNav.wiki-nav .nav-shell,.VPNav.wiki-nav .nav-shell::before,.VPNav.wiki-nav .brand,.VPNav.wiki-nav .top-menu a{transition:none!important}
+}
