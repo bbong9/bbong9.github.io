@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>长截图与区域录屏 | LumaTrace Wiki</title>
+  <meta name="description" content="长截图用于完整页面，区域录屏用于教程演示；两个入口都可以从截图选区直接进入。">
+  <link rel="icon" type="image/png" href="../lumatrace/lumatrace-icon.png?v=20260621-lumatrace-wiki-v4">
+  <link rel="stylesheet" href="../lumatrace/wiki.css?v=20260622-bottom-pill-nav">
+  <script>
+    (() => {
+      const key = 'lumatrace-wiki-theme';
+      if (localStorage.getItem(key) === 'dark') document.documentElement.classList.add('dark');
+      window.addEventListener('DOMContentLoaded', () => {
+        const button = document.querySelector('[data-theme-toggle]');
+        const sync = () => {
+          const dark = document.documentElement.classList.contains('dark');
+          button?.setAttribute('aria-checked', String(dark));
+          button?.setAttribute('title', dark ? '切换到浅色模式' : '切换到深色模式');
+        };
+        button?.addEventListener('click', () => {
+          const dark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem(key, dark ? 'dark' : 'light');
+          sync();
+        });
+        sync();
+      });
+    })();
+  </script>
+</head>
+<body class="ss-ref-page">
+  <header class="VPNav wiki-nav">
+    <div class="nav-shell">
+      <a class="brand" href="../">
+        <span class="brand-mark"><img decoding="async" src="../lumatrace/lumatrace-icon.png?v=20260621-lumatrace-wiki-v4" alt="" width="28" height="28"></span>
+        <span>LumaTrace Wiki</span>
+      </a>
+      <div class="nav-right">
+        <nav class="top-menu" aria-label="主导航"><a class="" href="../">首页</a><a class="" href="../wiki/quickstart.html">快速开始</a><a class="active" href="../wiki/capture.html">截图工作流</a><a class="" href="../wiki/settings-permissions.html">设置</a><a class="" href="../wiki/troubleshooting.html">常见问题</a><a class="" href="../wiki/changelog.html">更新日志</a></nav>
+        <div class="VPNavBarAppearance appearance"><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-label="外观" aria-checked="false" data-theme-toggle><span class="check"><span class="icon"><span class="vpi-sun sun"></span><span class="vpi-moon moon"></span></span></span></button></div>
+      </div>
+    </div>
+  </header>
+  <div class="layout has-sidebar">
+    <aside class="sidebar" aria-label="侧边栏导航">
+      <nav class="sidebar-tree" id="VPSidebarNav" aria-label="文档导航">
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">入门</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../"><p class="text">总览</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/quickstart.html"><p class="text">快速开始</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/install.html"><p class="text">安装与首次授权</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 has-active"><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">核心功能教程</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/capture.html"><p class="text">截图工作流</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/editor.html"><p class="text">编辑标注与打码</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/ocr-translation.html"><p class="text">OCR 与翻译</p></a></div></div>
+<div class="sidebar-item level-1 is-link is-active has-active"><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/longshot-recording.html"><p class="text">长截图与录屏</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">设置与隐私</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/settings-permissions.html"><p class="text">设置与权限</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/history-privacy.html"><p class="text">历史与隐私</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">帮助</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/troubleshooting.html"><p class="text">常见问题</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/changelog.html"><p class="text">更新日志</p></a></div></div>
+</div></section>
+      </nav>
+    </aside>
+    <main id="VPContent" class="content">
+      <article class="doc wiki-doc">
+<section class="ss-ref-hero"><div class="ss-ref-shell ss-ref-hero-grid"><div class="ss-ref-copy ss-ref-reveal"><p class="ss-ref-eyebrow">LONGSHOT / RECORDING</p><h1>长截图与区域录屏 <span class="grad-text">放进同一套工作流</span></h1><p class="ss-ref-lede">从当前截图选区进入长截图或录屏，减少重新框选，适合教程、页面反馈和功能演示。</p><div class="ss-ref-actions"><a class="ss-btn ss-btn-primary" href="#longshot-flow">长截图流程</a><a class="ss-btn ss-btn-ghost" href="#recording">区域录屏</a></div><div class="ss-ref-meta"><span>长截图</span><span>区域录屏</span><span>系统录音</span></div></div><div class="ss-ref-visual"><div class="ss-demo-card ss-ref-reveal"><div class="ss-mac-titlebar"><span class="ss-mac-lights"><i></i><i></i><i></i></span>Longshot & Recording</div><div class="ss-demo-stage"><div class="ss-demo-app"><div class="ss-demo-side"><span class="ss-bar lg w60"></span><span class="ss-bar w80"></span><span class="ss-bar w70"></span><span class="ss-demo-shot"></span></div><div class="ss-demo-main"><span class="ss-bar lg w60"></span><span class="ss-bar w90"></span><span class="ss-bar w80"></span><span class="ss-bar w70"></span><span class="ss-demo-shot"></span></div></div><div class="ss-capture-rect"><i></i><i></i><i></i><i></i><span class="ss-dim-pill">1173 × 770 px</span></div><div class="ss-toolbar-demo"><span class="ss-tool-dot on">T</span><span class="ss-tool-dot">↗</span><span class="ss-tool-dot">▦</span><span class="ss-tool-dot">OCR</span></div></div></div></div></div></section><section class="ss-feature-section" id="longshot-flow"><div class="ss-ref-shell"><div class="ss-doc-grid ss-ref-reveal"><div class="ss-doc-copy"><h2>长截图推荐流程</h2><p>先框选滚动区域，再进入长截图。页面稳定后开始滚动拼接。</p><ul class="ss-points"><li>自动长截图适合普通长页面。</li><li>页面有吸顶栏/悬浮按钮时优先手动长截图。</li><li>不要移动窗口，滚动后等页面稳定。</li></ul></div><div class="ss-doc-visual"><div class="ss-demo-card ss-ref-reveal"><div class="ss-mac-titlebar"><span class="ss-mac-lights"><i></i><i></i><i></i></span>Scrolling capture</div><div class="ss-demo-stage"><div class="ss-demo-app"><div class="ss-demo-side"><span class="ss-bar lg w60"></span><span class="ss-bar w80"></span><span class="ss-bar w70"></span><span class="ss-demo-shot"></span></div><div class="ss-demo-main"><span class="ss-bar lg w60"></span><span class="ss-bar w90"></span><span class="ss-bar w80"></span><span class="ss-bar w70"></span><span class="ss-demo-shot"></span></div></div><div class="ss-capture-rect"><i></i><i></i><i></i><i></i><span class="ss-dim-pill">1173 × 770 px</span></div><div class="ss-scan-line"></div><div class="ss-toolbar-demo"><span class="ss-tool-dot on">T</span><span class="ss-tool-dot">↗</span><span class="ss-tool-dot">▦</span><span class="ss-tool-dot">OCR</span></div></div></div></div></div><div class="ss-doc-grid flip ss-ref-reveal"><div class="ss-doc-copy"><h2>避免拼接线</h2><p>长截图已针对拼接线、重叠错位和边缘线做持续修复。</p><ul class="ss-points"><li>拼接前保持窗口稳定。</li><li>复杂网页尽量关闭悬浮工具条。</li><li>如果还有横线，按真实位置继续调修复半径。</li></ul></div><div class="ss-doc-visual"><div class="ss-history-vis ss-ref-reveal"><div class="ss-history-search">搜索截图、录屏、OCR 文本</div><div class="ss-history-grid"><div class="ss-history-cell"><span class="ss-history-type">PNG</span></div><div class="ss-history-cell vid"><span class="ss-history-type">MP4</span></div><div class="ss-history-cell gif"><span class="ss-history-type">GIF</span></div><div class="ss-history-cell"><span class="ss-history-type">OCR</span></div><div class="ss-history-cell vid"><span class="ss-history-type">REC</span></div><div class="ss-history-cell"><span class="ss-history-type">PIN</span></div></div></div></div></div><div class="ss-doc-grid ss-ref-reveal" id="recording"><div class="ss-doc-copy"><h2>区域录屏</h2><p>对当前选区开始区域录屏，可用于项目演示和功能说明。</p><ul class="ss-points"><li>V 对当前选区开始区域录屏。</li><li>系统录音只在需要录系统声音时开启。</li><li>录屏文件保存到默认录屏目录。</li></ul></div><div class="ss-doc-visual"><div class="ss-cloud-vis ss-ref-reveal"><div class="ss-cloud-card"><div class="ss-qa-thumb"><span class="ss-bar lg w60"></span><span class="ss-bar w90"></span><span class="ss-bar w80"></span><span class="ss-demo-shot"></span></div><div class="ss-qa-corners"><span>↗</span><span class="on">✓</span></div></div><div class="ss-cloud-toast"><span class="ss-toast-glyph" aria-hidden="true"></span><div><strong>已复制</strong><span class="ss-toast-note">操作结果已写入剪贴板</span></div></div></div></div></div></div></section>
+      </article>
+      <aside class="doc-aside" aria-label="本页目录"><div class="doc-aside-container"><nav class="doc-outline" aria-labelledby="doc-outline-title"><div class="doc-outline-content"><div class="outline-marker" aria-hidden="true"></div><div class="outline-title" id="doc-outline-title" role="heading" aria-level="2">本页目录</div><ul class="doc-outline-list" data-page-outline></ul></div></nav></div></aside>
+    </main>
+  </div>
+  <script data-page-outline-script>
+    (() => {
+      const article = document.querySelector('article.doc');
+      const aside = document.querySelector('.doc-aside');
+      const list = document.querySelector('[data-page-outline]');
+      if (!article || !aside || !list) return;
+      const headings = Array.from(article.querySelectorAll('h2, h3')).filter((heading) => heading.textContent.trim());
+      if (!headings.length) { aside.hidden = true; return; }
+      const counts = new Map();
+      const slugify = (text) => {
+        const raw = text.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w一-鿿-]+/g, '').replace(/^-+|-+$/g, '') || 'section';
+        const count = counts.get(raw) || 0;
+        counts.set(raw, count + 1);
+        return count ? raw + '-' + count : raw;
+      };
+      const links = headings.map((heading) => {
+        if (!heading.id) heading.id = slugify(heading.textContent);
+        const item = document.createElement('li');
+        item.className = 'doc-outline-item ' + heading.tagName.toLowerCase();
+        const link = document.createElement('a');
+        link.className = 'outline-link' + (heading.tagName === 'H3' ? ' nested' : '');
+        link.href = '#' + heading.id;
+        link.textContent = heading.textContent.trim();
+        item.appendChild(link);
+        list.appendChild(item);
+        return link;
+      });
+      const marker = aside.querySelector('.outline-marker');
+      const setActive = () => {
+        const threshold = window.scrollY + 128;
+        let activeIndex = 0;
+        headings.forEach((heading, index) => { if (heading.getBoundingClientRect().top + window.scrollY <= threshold) activeIndex = index; });
+        links.forEach((link, index) => link.classList.toggle('active', index === activeIndex));
+        const active = links[activeIndex];
+        if (marker && active) {
+          const content = marker.closest('.doc-outline-content');
+          const activeRect = active.getBoundingClientRect();
+          const contentRect = content ? content.getBoundingClientRect() : { top: 0 };
+          const markerTop = activeRect.top - contentRect.top + (activeRect.height - (marker.offsetHeight || 18)) / 2;
+          marker.style.opacity = '1';
+          marker.style.top = Math.max(0, Math.round(markerTop)) + 'px';
+        }
+      };
+      window.addEventListener('scroll', () => requestAnimationFrame(setActive), { passive: true });
+      window.addEventListener('resize', setActive);
+      setActive();
+    })();
+  </script>
+  <script src="../lumatrace/code-copy.js?v=20260621-lumatrace-wiki-v4" defer></script>
+  <script src="../lumatrace/floating-nav.js?v=20260622-bottom-pill-nav" defer></script>
+  <script src="../lumatrace/reference-effects.js?v=20260622-no-link-card-v2" defer></script>
+  <script src="../lumatrace/top-nav-indicator.js?v=20260621-lumatrace-wiki-v4" defer></script>
+</body>
+</html>

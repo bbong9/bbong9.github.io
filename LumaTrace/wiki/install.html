@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>安装与首次授权 | LumaTrace Wiki</title>
+  <meta name="description" content="这里面向普通用户，按“下载 → 授权 → 验证”的顺序完成首次启动。">
+  <link rel="icon" type="image/png" href="../lumatrace/lumatrace-icon.png?v=20260621-lumatrace-wiki-v4">
+  <link rel="stylesheet" href="../lumatrace/wiki.css?v=20260622-bottom-pill-nav">
+  <script>
+    (() => {
+      const key = 'lumatrace-wiki-theme';
+      if (localStorage.getItem(key) === 'dark') document.documentElement.classList.add('dark');
+      window.addEventListener('DOMContentLoaded', () => {
+        const button = document.querySelector('[data-theme-toggle]');
+        const sync = () => {
+          const dark = document.documentElement.classList.contains('dark');
+          button?.setAttribute('aria-checked', String(dark));
+          button?.setAttribute('title', dark ? '切换到浅色模式' : '切换到深色模式');
+        };
+        button?.addEventListener('click', () => {
+          const dark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem(key, dark ? 'dark' : 'light');
+          sync();
+        });
+        sync();
+      });
+    })();
+  </script>
+</head>
+<body class="ss-ref-page">
+  <header class="VPNav wiki-nav">
+    <div class="nav-shell">
+      <a class="brand" href="../">
+        <span class="brand-mark"><img decoding="async" src="../lumatrace/lumatrace-icon.png?v=20260621-lumatrace-wiki-v4" alt="" width="28" height="28"></span>
+        <span>LumaTrace Wiki</span>
+      </a>
+      <div class="nav-right">
+        <nav class="top-menu" aria-label="主导航"><a class="" href="../">首页</a><a class="active" href="../wiki/quickstart.html">快速开始</a><a class="" href="../wiki/capture.html">截图工作流</a><a class="" href="../wiki/settings-permissions.html">设置</a><a class="" href="../wiki/troubleshooting.html">常见问题</a><a class="" href="../wiki/changelog.html">更新日志</a></nav>
+        <div class="VPNavBarAppearance appearance"><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-label="外观" aria-checked="false" data-theme-toggle><span class="check"><span class="icon"><span class="vpi-sun sun"></span><span class="vpi-moon moon"></span></span></span></button></div>
+      </div>
+    </div>
+  </header>
+  <div class="layout has-sidebar">
+    <aside class="sidebar" aria-label="侧边栏导航">
+      <nav class="sidebar-tree" id="VPSidebarNav" aria-label="文档导航">
+<section class="sidebar-item level-0 has-active"><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">入门</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../"><p class="text">总览</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/quickstart.html"><p class="text">快速开始</p></a></div></div>
+<div class="sidebar-item level-1 is-link is-active has-active"><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/install.html"><p class="text">安装与首次授权</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">核心功能教程</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/capture.html"><p class="text">截图工作流</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/editor.html"><p class="text">编辑标注与打码</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/ocr-translation.html"><p class="text">OCR 与翻译</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/longshot-recording.html"><p class="text">长截图与录屏</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">设置与隐私</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/settings-permissions.html"><p class="text">设置与权限</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/history-privacy.html"><p class="text">历史与隐私</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">帮助</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/troubleshooting.html"><p class="text">常见问题</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/changelog.html"><p class="text">更新日志</p></a></div></div>
+</div></section>
+      </nav>
+    </aside>
+    <main id="VPContent" class="content">
+      <article class="doc wiki-doc">
+<section class="ss-ref-hero"><div class="ss-ref-shell ss-ref-hero-grid"><div class="ss-ref-copy ss-ref-reveal"><p class="ss-ref-eyebrow">INSTALL</p><h1>安装与首次授权 <span class="grad-text">一次讲清楚</span></h1><p class="ss-ref-lede">下载 DMG、拖入应用程序、打开权限检查，后续权限齐全就不再打扰。</p><div class="ss-ref-actions"><a class="ss-btn ss-btn-primary" href="#download">下载安装</a><a class="ss-btn ss-btn-ghost" href="#permissions">权限说明</a></div><div class="ss-ref-meta"><span>DMG 安装</span><span>屏幕录制</span><span>辅助功能</span></div></div><div class="ss-ref-visual"><div class="ss-cloud-vis ss-ref-reveal"><div class="ss-cloud-card"><div class="ss-qa-thumb"><span class="ss-bar lg w60"></span><span class="ss-bar w90"></span><span class="ss-bar w80"></span><span class="ss-demo-shot"></span></div><div class="ss-qa-corners"><span>↗</span><span class="on">✓</span></div></div><div class="ss-cloud-toast"><span class="ss-toast-glyph" aria-hidden="true"></span><div><strong>已复制</strong><span class="ss-toast-note">操作结果已写入剪贴板</span></div></div></div></div></div></section><section class="ss-doc-section" id="download"><div class="ss-ref-shell"><div class="ss-section-head center ss-ref-reveal"><p class="ss-ref-eyebrow">SETUP</p><h2>下载安装</h2><p>用卡片把首次安装步骤拆开，避免用户在系统设置里迷路。</p></div><div class="ss-card-grid"><div class="ss-info-card ss-ref-reveal"><div class="ss-icon">↓</div><h3>下载最新版本</h3><p>打开 GitHub Releases，下载 LumaTrace.dmg 或 LumaTrace-latest.dmg。</p></div><div class="ss-info-card ss-ref-reveal"><div class="ss-icon">⇥</div><h3>拖入应用程序</h3><p>打开 DMG，把 LumaTrace.app 拖进“应用程序”。</p></div><div class="ss-info-card ss-ref-reveal"><div class="ss-icon">✓</div><h3>确认菜单栏图标</h3><p>从应用程序启动 LumaTrace，确认菜单栏出现图标。</p></div></div></div></section><section class="ss-faq-section" id="permissions"><div class="ss-ref-shell"><div class="ss-section-head center ss-ref-reveal"><p class="ss-ref-eyebrow">FAQ</p><h2>首次授权和安装后验证</h2><p>按这个顺序检查，通常能解决首次启动的 90% 问题。</p></div><div class="ss-faq-list"><details class="ss-faq-item ss-ref-reveal" open><summary>首次授权流程</summary><div><ol><li>首次打开后会弹出独立权限检查窗口。</li><li>点“打开设置”，进入系统隐私与安全性页面。</li><li>如果列表里没有 LumaTrace，把权限窗口里的 LumaTrace 卡片拖入对应列表。</li><li>开启权限后回到 LumaTrace，后续满足权限时不会反复弹窗。</li></ol></div></details><details class="ss-faq-item ss-ref-reveal" ><summary>安装后怎么验证</summary><div><ul><li>能用快捷键唤起截图界面。</li><li>截图不是黑屏或空白。</li><li>长截图能识别目标窗口并开始滚动。</li><li>录屏能正常保存到默认录屏目录。</li></ul></div></details></div></div></section>
+      </article>
+      <aside class="doc-aside" aria-label="本页目录"><div class="doc-aside-container"><nav class="doc-outline" aria-labelledby="doc-outline-title"><div class="doc-outline-content"><div class="outline-marker" aria-hidden="true"></div><div class="outline-title" id="doc-outline-title" role="heading" aria-level="2">本页目录</div><ul class="doc-outline-list" data-page-outline></ul></div></nav></div></aside>
+    </main>
+  </div>
+  <script data-page-outline-script>
+    (() => {
+      const article = document.querySelector('article.doc');
+      const aside = document.querySelector('.doc-aside');
+      const list = document.querySelector('[data-page-outline]');
+      if (!article || !aside || !list) return;
+      const headings = Array.from(article.querySelectorAll('h2, h3')).filter((heading) => heading.textContent.trim());
+      if (!headings.length) { aside.hidden = true; return; }
+      const counts = new Map();
+      const slugify = (text) => {
+        const raw = text.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w一-鿿-]+/g, '').replace(/^-+|-+$/g, '') || 'section';
+        const count = counts.get(raw) || 0;
+        counts.set(raw, count + 1);
+        return count ? raw + '-' + count : raw;
+      };
+      const links = headings.map((heading) => {
+        if (!heading.id) heading.id = slugify(heading.textContent);
+        const item = document.createElement('li');
+        item.className = 'doc-outline-item ' + heading.tagName.toLowerCase();
+        const link = document.createElement('a');
+        link.className = 'outline-link' + (heading.tagName === 'H3' ? ' nested' : '');
+        link.href = '#' + heading.id;
+        link.textContent = heading.textContent.trim();
+        item.appendChild(link);
+        list.appendChild(item);
+        return link;
+      });
+      const marker = aside.querySelector('.outline-marker');
+      const setActive = () => {
+        const threshold = window.scrollY + 128;
+        let activeIndex = 0;
+        headings.forEach((heading, index) => { if (heading.getBoundingClientRect().top + window.scrollY <= threshold) activeIndex = index; });
+        links.forEach((link, index) => link.classList.toggle('active', index === activeIndex));
+        const active = links[activeIndex];
+        if (marker && active) {
+          const content = marker.closest('.doc-outline-content');
+          const activeRect = active.getBoundingClientRect();
+          const contentRect = content ? content.getBoundingClientRect() : { top: 0 };
+          const markerTop = activeRect.top - contentRect.top + (activeRect.height - (marker.offsetHeight || 18)) / 2;
+          marker.style.opacity = '1';
+          marker.style.top = Math.max(0, Math.round(markerTop)) + 'px';
+        }
+      };
+      window.addEventListener('scroll', () => requestAnimationFrame(setActive), { passive: true });
+      window.addEventListener('resize', setActive);
+      setActive();
+    })();
+  </script>
+  <script src="../lumatrace/code-copy.js?v=20260621-lumatrace-wiki-v4" defer></script>
+  <script src="../lumatrace/floating-nav.js?v=20260622-bottom-pill-nav" defer></script>
+  <script src="../lumatrace/reference-effects.js?v=20260622-no-link-card-v2" defer></script>
+  <script src="../lumatrace/top-nav-indicator.js?v=20260621-lumatrace-wiki-v4" defer></script>
+</body>
+</html>

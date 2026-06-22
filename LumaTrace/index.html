@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>总览 | LumaTrace Wiki</title>
+  <meta name="description" content="LumaTrace Wiki 总览和使用入口">
+  <link rel="icon" type="image/png" href="lumatrace/lumatrace-icon.png?v=20260621-lumatrace-wiki-v4">
+  <link rel="stylesheet" href="lumatrace/wiki.css?v=20260622-intro-nav-hidden">
+  <script>
+    (() => {
+      const key = 'lumatrace-wiki-theme';
+      const introKey = 'lumatrace-wiki-intro-entered-at';
+      const introSkipWindow = 5 * 60 * 1000;
+      try {
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      } catch {
+        // Keep native scroll restoration if the browser blocks access.
+      }
+      if (localStorage.getItem(key) === 'dark') document.documentElement.classList.add('dark');
+      document.documentElement.classList.add('home-reveal-pending');
+      let shouldSkipIntro = false;
+      try {
+        const introEnteredAt = Number(sessionStorage.getItem(introKey) || 0);
+        shouldSkipIntro = introEnteredAt > 0 && Date.now() - introEnteredAt < introSkipWindow;
+        if (shouldSkipIntro) document.documentElement.classList.add('skip-intro');
+      } catch {
+        // Keep the intro visible if session storage is unavailable.
+      }
+      if (!shouldSkipIntro) {
+        document.documentElement.classList.add('intro-locked');
+        window.scrollTo(0, 0);
+      }
+      window.addEventListener('pageshow', () => {
+        if (document.documentElement.classList.contains('intro-locked')) {
+          window.scrollTo({ top: 0, behavior: 'auto' });
+        }
+      });
+      window.addEventListener('DOMContentLoaded', () => {
+        const button = document.querySelector('[data-theme-toggle]');
+        const sync = () => {
+          const dark = document.documentElement.classList.contains('dark');
+          button?.setAttribute('aria-checked', String(dark));
+          button?.setAttribute('title', dark ? '切换到浅色模式' : '切换到深色模式');
+        };
+        button?.addEventListener('click', () => {
+          const dark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem(key, dark ? 'dark' : 'light');
+          sync();
+        });
+        sync();
+      });
+    })();
+  </script>
+</head>
+<body>
+  <header class="VPNav wiki-nav">
+    <div class="nav-shell">
+      <a class="brand" href="./">
+        <span class="brand-mark"><img decoding="async" src="lumatrace/lumatrace-icon.png?v=20260621-lumatrace-wiki-v4" alt="" width="28" height="28"></span>
+        <span>LumaTrace Wiki</span>
+      </a>
+      <div class="nav-right">
+        <nav class="top-menu" aria-label="主导航"><a class="active" href="./">首页</a><a class="" href="./wiki/quickstart.html">快速开始</a><a class="" href="./wiki/capture.html">截图工作流</a><a class="" href="./wiki/settings-permissions.html">设置</a><a class="" href="./wiki/troubleshooting.html">常见问题</a><a class="" href="./wiki/changelog.html">更新日志</a></nav>
+        <div class="VPNavBarAppearance appearance"><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-label="外观" aria-checked="false" data-theme-toggle><span class="check"><span class="icon"><span class="vpi-sun sun"></span><span class="vpi-moon moon"></span></span></span></button></div>
+      </div>
+    </div>
+  </header>
+  <section class="intro-start" data-intro-start aria-labelledby="intro-start-title">
+    <canvas
+      class="intro-particle-canvas"
+      data-intro-particle
+      data-words="WELCOME TO|LUMATRACE|DESIGN BY|BBONG9"
+      aria-hidden="true"
+    ></canvas>
+    <div class="intro-start-vignette" aria-hidden="true"></div>
+    <div class="intro-start-hint" aria-hidden="true">CLICK / SCROLL TO ENTER</div>
+    <h1 id="intro-start-title" class="sr-only">WELCOME TO LUMATRACE DESIGN BY BBONG9</h1>
+    <noscript>
+      <p class="intro-start-fallback">WELCOME TO<br>LUMATRACE<br>DESIGN BY<br>BBONG9</p>
+    </noscript>
+  </section>
+  <main id="VPContent" class="wiki-home-content">
+    <section class="wiki-hero-shell wiki-hero-stacked home-hero lumatrace-home-hero">
+      <div class="wiki-hero-copy">
+        <p class="eyebrow">macOS 原生截图工具</p>
+        <h1 class="home-animated-title" aria-label="LumaTrace Wiki">
+          <span class="home-title-text" aria-hidden="true">
+            <span class="home-title-letter" style="--letter-index:0">S</span><span class="home-title-letter" style="--letter-index:1">w</span><span class="home-title-letter" style="--letter-index:2">i</span><span class="home-title-letter" style="--letter-index:3">f</span><span class="home-title-letter" style="--letter-index:4">t</span><span class="home-title-letter" style="--letter-index:5">S</span><span class="home-title-letter" style="--letter-index:6">h</span><span class="home-title-letter" style="--letter-index:7">o</span><span class="home-title-letter" style="--letter-index:8">t</span><span class="home-title-letter" style="--letter-index:9">&nbsp;</span><span class="home-title-letter" style="--letter-index:10">W</span><span class="home-title-letter" style="--letter-index:11">i</span><span class="home-title-letter" style="--letter-index:12">k</span><span class="home-title-letter" style="--letter-index:13">i</span>
+          </span>
+          <span class="home-title-underline" aria-hidden="true"></span>
+        </h1>
+      </div>
+      <div class="wiki-hero-visual">
+        <img decoding="async" src="lumatrace/screenshots/app-main-capture.png?v=20260622-dark-captures" alt="LumaTrace 主界面：快捷键唤起后框选截图区域，底部工具栏可直接标注、OCR、复制和保存">
+      </div>
+      <div class="wiki-hero-bottom">
+        <div class="wiki-hero-actions wiki-hero-actions-single">
+          <a class="primary rainbow-start-button" href="wiki/quickstart.html"><span class="cta-text">立即开始</span></a>
+        </div>
+        <div class="wiki-stat-row"><span>快捷截图</span><span>本地 OCR</span><span>隐私打码</span><span>微信同步</span></div>
+        <p class="lead">LumaTrace 面向日常办公、产品反馈、教程制作和隐私打码：按快捷键框选，直接标注或识别文字，最后复制、保存、贴图或进入长截图/录屏。</p>
+      </div>
+    </section>
+    <section class="wiki-section wiki-home-section">
+      <div class="desktop-section-header"><h2>先看能做什么</h2><p>主页不再放空内容，直接把 LumaTrace 最常用能力按使用场景展示清楚。</p></div>
+      <div class="wiki-feature-grid">
+        <a class="wiki-feature-card" href="wiki/capture.html"><strong>截图工作流</strong><span>框选、窗口识别、工具栏、复制/保存/拖拽导出。</span></a>
+        <a class="wiki-feature-card" href="wiki/editor.html"><strong>标注与隐私保护</strong><span>箭头、矩形、文本、序号、灰白块状马赛克和模糊。</span></a>
+        <a class="wiki-feature-card" href="wiki/ocr-translation.html"><strong>OCR 与翻译</strong><span>框选范围后直接识别/翻译，支持多国语言和可编辑文本框。</span></a>
+        <a class="wiki-feature-card" href="wiki/longshot-recording.html"><strong>长截图与录屏</strong><span>自动/手动长截图、拼接线修复、区域录屏和系统录音引导。</span></a>
+        <a class="wiki-feature-card" href="wiki/settings-permissions.html"><strong>设置与权限</strong><span>快捷键、保存格式、权限状态、授权、更新和同步入口。</span></a>
+        <a class="wiki-feature-card" href="wiki/history-privacy.html"><strong>历史与隐私</strong><span>最近记录、隐私模式、默认目录清理和敏感信息边界。</span></a>
+      </div>
+    </section>
+    <section class="wiki-section wiki-home-section wiki-two-col">
+      <div>
+        <h2>推荐阅读顺序</h2>
+        <ol class="wiki-steps">
+          <li><b>安装与授权</b><span>先完成屏幕录制/辅助功能权限，避免截图空白或长截图不能滚动。</span></li>
+          <li><b>截图工作流</b><span>学会框选、工具栏、快捷键和导出方式，这是最高频功能。</span></li>
+          <li><b>编辑标注</b><span>掌握文本、箭头、序号、马赛克和 Command 拖动选择。</span></li>
+          <li><b>OCR/翻译/同步</b><span>配置 Provider 和 API Key 后，再开启跨设备同步备份。</span></li>
+        </ol>
+      </div>
+      <figure class="screenshot pro-screenshot"><img loading="lazy" decoding="async" src="lumatrace/screenshots/settings-general.png?v=20260622-dark-captures" alt="LumaTrace 设置常规界面"><figcaption>常规设置集中展示启动行为、外观、权限状态和常用入口。</figcaption></figure>
+    </section>
+  </main>
+  <script defer src="lumatrace/intro-particle-text.js?v=20260622-intro-nav-hidden"></script>
+  <script src="lumatrace/code-copy.js?v=20260621-lumatrace-wiki-v4" defer></script>
+  <script src="lumatrace/floating-nav.js?v=20260622-bottom-pill-nav" defer></script>
+  <script src="lumatrace/top-nav-indicator.js?v=20260621-lumatrace-wiki-v4" defer></script>
+</body>
+</html>

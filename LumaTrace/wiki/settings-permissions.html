@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>设置与权限 | LumaTrace Wiki</title>
+  <meta name="description" content="设置页用于管理快捷键、保存格式、历史隐私、授权、微信同步、自动更新和高级能力。">
+  <link rel="icon" type="image/png" href="../lumatrace/lumatrace-icon.png?v=20260621-lumatrace-wiki-v4">
+  <link rel="stylesheet" href="../lumatrace/wiki.css?v=20260622-bottom-pill-nav">
+  <script>
+    (() => {
+      const key = 'lumatrace-wiki-theme';
+      if (localStorage.getItem(key) === 'dark') document.documentElement.classList.add('dark');
+      window.addEventListener('DOMContentLoaded', () => {
+        const button = document.querySelector('[data-theme-toggle]');
+        const sync = () => {
+          const dark = document.documentElement.classList.contains('dark');
+          button?.setAttribute('aria-checked', String(dark));
+          button?.setAttribute('title', dark ? '切换到浅色模式' : '切换到深色模式');
+        };
+        button?.addEventListener('click', () => {
+          const dark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem(key, dark ? 'dark' : 'light');
+          sync();
+        });
+        sync();
+      });
+    })();
+  </script>
+</head>
+<body class="ss-ref-page">
+  <header class="VPNav wiki-nav">
+    <div class="nav-shell">
+      <a class="brand" href="../">
+        <span class="brand-mark"><img decoding="async" src="../lumatrace/lumatrace-icon.png?v=20260621-lumatrace-wiki-v4" alt="" width="28" height="28"></span>
+        <span>LumaTrace Wiki</span>
+      </a>
+      <div class="nav-right">
+        <nav class="top-menu" aria-label="主导航"><a class="" href="../">首页</a><a class="" href="../wiki/quickstart.html">快速开始</a><a class="" href="../wiki/capture.html">截图工作流</a><a class="active" href="../wiki/settings-permissions.html">设置</a><a class="" href="../wiki/troubleshooting.html">常见问题</a><a class="" href="../wiki/changelog.html">更新日志</a></nav>
+        <div class="VPNavBarAppearance appearance"><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-label="外观" aria-checked="false" data-theme-toggle><span class="check"><span class="icon"><span class="vpi-sun sun"></span><span class="vpi-moon moon"></span></span></span></button></div>
+      </div>
+    </div>
+  </header>
+  <div class="layout has-sidebar">
+    <aside class="sidebar" aria-label="侧边栏导航">
+      <nav class="sidebar-tree" id="VPSidebarNav" aria-label="文档导航">
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">入门</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../"><p class="text">总览</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/quickstart.html"><p class="text">快速开始</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/install.html"><p class="text">安装与首次授权</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">核心功能教程</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/capture.html"><p class="text">截图工作流</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/editor.html"><p class="text">编辑标注与打码</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/ocr-translation.html"><p class="text">OCR 与翻译</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/longshot-recording.html"><p class="text">长截图与录屏</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 has-active"><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">设置与隐私</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link is-active has-active"><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/settings-permissions.html"><p class="text">设置与权限</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/history-privacy.html"><p class="text">历史与隐私</p></a></div></div>
+</div></section>
+<section class="sidebar-item level-0 "><div class="sidebar-entry"><div class="indicator"></div><h2 class="text">帮助</h2></div><div class="items">
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/troubleshooting.html"><p class="text">常见问题</p></a></div></div>
+<div class="sidebar-item level-1 is-link "><div class="sidebar-entry"><div class="indicator"></div><a class="link" href="../wiki/changelog.html"><p class="text">更新日志</p></a></div></div>
+</div></section>
+      </nav>
+    </aside>
+    <main id="VPContent" class="content">
+      <article class="doc wiki-doc">
+<section class="ss-ref-hero"><div class="ss-ref-shell ss-ref-hero-grid"><div class="ss-ref-copy ss-ref-reveal"><p class="ss-ref-eyebrow">SETTINGS</p><h1>设置与权限 <span class="grad-text">全部模块化</span></h1><p class="ss-ref-lede">常规、快捷键、保存格式、高级、同步都改成目标站那种左右功能行，图片对应到真实界面。</p><div class="ss-ref-actions"><a class="ss-btn ss-btn-primary" href="#settings-overview">设置分区</a><a class="ss-btn ss-btn-ghost" href="#settings-overview">设置说明</a></div><div class="ss-ref-meta"><span>常规</span><span>快捷键</span><span>保存格式</span><span>高级</span></div></div><div class="ss-ref-visual"><figure class="ss-img-card ss-ref-reveal"><img loading="lazy" decoding="async" src="../lumatrace/screenshots/settings-general.png?v=20260622-dark-captures" alt="设置常规页：启动、外观、权限状态和常用入口。"><figcaption>设置常规页：启动、外观、权限状态和常用入口。</figcaption></figure></div></div></section><section class="ss-feature-section" id="settings-overview"><div class="ss-ref-shell"><div class="ss-doc-grid ss-ref-reveal"><div class="ss-doc-copy"><h2>设置页分区</h2><p>设置页按使用频率分区，常规和权限放在最前面。</p><ul class="ss-points"><li>常规：启动、外观、权限状态和常用入口。</li><li>快捷键：全局快捷键、截图界面功能键。</li><li>保存与格式：图片格式、录屏格式和保存目录。</li></ul></div><div class="ss-doc-visual"><figure class="ss-img-card ss-ref-reveal"><img loading="lazy" decoding="async" src="../lumatrace/screenshots/settings-general.png?v=20260622-dark-captures" alt="设置常规页：启动、外观、权限状态和常用入口。"><figcaption>设置常规页：启动、外观、权限状态和常用入口。</figcaption></figure></div></div><div class="ss-doc-grid flip ss-ref-reveal"><div class="ss-doc-copy"><h2>快捷键</h2><p>所有快捷键集中查看，避免工具切换后仍停留在上一个工具。</p><ul class="ss-points"><li>全局快捷键用于唤起截图。</li><li>截图界面功能键只在截图框出现后生效。</li><li>冲突时换成 ⌥A、⌘⌥2 等组合。</li></ul></div><div class="ss-doc-visual"><figure class="ss-img-card ss-ref-reveal"><img loading="lazy" decoding="async" src="../lumatrace/screenshots/settings-hotkeys.png?v=20260622-dark-captures" alt="快捷键页：全局快捷键、截图界面功能键和程序快捷键。"><figcaption>快捷键页：全局快捷键、截图界面功能键和程序快捷键。</figcaption></figure></div></div><div class="ss-doc-grid ss-ref-reveal"><div class="ss-doc-copy"><h2>保存与格式建议</h2><p>图片、录屏、自动保存和目录都在同一个页面调整。</p><ul class="ss-points"><li>图片建议 PNG，保证标注清晰。</li><li>录屏按场景选择格式。</li><li>默认目录建议固定，方便历史记录查找。</li></ul></div><div class="ss-doc-visual"><figure class="ss-img-card ss-ref-reveal"><img loading="lazy" decoding="async" src="../lumatrace/screenshots/settings-save-format.png?v=20260622-dark-captures" alt="保存与格式页：图片格式、自动保存、录屏格式和保存目录。"><figcaption>保存与格式页：图片格式、自动保存、录屏格式和保存目录。</figcaption></figure></div></div><div class="ss-doc-grid flip ss-ref-reveal"><div class="ss-doc-copy"><h2>高级设置说明</h2><p>OCR、翻译、长截图、诊断相关能力集中在高级页。</p><ul class="ss-points"><li>API Key 和接口按 Provider 填写。</li><li>长截图参数用于特殊网页兼容。</li><li>诊断信息用于定位异常。</li></ul></div><div class="ss-doc-visual"><figure class="ss-img-card ss-ref-reveal"><img loading="lazy" decoding="async" src="../lumatrace/screenshots/settings-advanced.png?v=20260622-dark-captures" alt="高级设置页：OCR、翻译、长截图和诊断相关配置。"><figcaption>高级设置页：OCR、翻译、长截图和诊断相关配置。</figcaption></figure></div></div><div class="ss-doc-grid ss-ref-reveal"><div class="ss-doc-copy"><h2>微信同步怎么理解</h2><p>同步用于备份设置和 API 信息，更换设备后登录账号即可恢复到本地。</p><ul class="ss-points"><li>同步的是配置，不是截图内容。</li><li>敏感配置应加密保存和传输。</li><li>本地仍保留可用配置。</li></ul></div><div class="ss-doc-visual"><figure class="ss-img-card ss-ref-reveal"><img loading="lazy" decoding="async" src="../lumatrace/screenshots/settings-sync.png?v=20260622-dark-captures" alt="同步设置页：用于备份 API、接口和偏好设置。"><figcaption>同步设置页：用于备份 API、接口和偏好设置。</figcaption></figure></div></div></div></section>
+      </article>
+      <aside class="doc-aside" aria-label="本页目录"><div class="doc-aside-container"><nav class="doc-outline" aria-labelledby="doc-outline-title"><div class="doc-outline-content"><div class="outline-marker" aria-hidden="true"></div><div class="outline-title" id="doc-outline-title" role="heading" aria-level="2">本页目录</div><ul class="doc-outline-list" data-page-outline></ul></div></nav></div></aside>
+    </main>
+  </div>
+  <script data-page-outline-script>
+    (() => {
+      const article = document.querySelector('article.doc');
+      const aside = document.querySelector('.doc-aside');
+      const list = document.querySelector('[data-page-outline]');
+      if (!article || !aside || !list) return;
+      const headings = Array.from(article.querySelectorAll('h2, h3')).filter((heading) => heading.textContent.trim());
+      if (!headings.length) { aside.hidden = true; return; }
+      const counts = new Map();
+      const slugify = (text) => {
+        const raw = text.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w一-鿿-]+/g, '').replace(/^-+|-+$/g, '') || 'section';
+        const count = counts.get(raw) || 0;
+        counts.set(raw, count + 1);
+        return count ? raw + '-' + count : raw;
+      };
+      const links = headings.map((heading) => {
+        if (!heading.id) heading.id = slugify(heading.textContent);
+        const item = document.createElement('li');
+        item.className = 'doc-outline-item ' + heading.tagName.toLowerCase();
+        const link = document.createElement('a');
+        link.className = 'outline-link' + (heading.tagName === 'H3' ? ' nested' : '');
+        link.href = '#' + heading.id;
+        link.textContent = heading.textContent.trim();
+        item.appendChild(link);
+        list.appendChild(item);
+        return link;
+      });
+      const marker = aside.querySelector('.outline-marker');
+      const setActive = () => {
+        const threshold = window.scrollY + 128;
+        let activeIndex = 0;
+        headings.forEach((heading, index) => { if (heading.getBoundingClientRect().top + window.scrollY <= threshold) activeIndex = index; });
+        links.forEach((link, index) => link.classList.toggle('active', index === activeIndex));
+        const active = links[activeIndex];
+        if (marker && active) {
+          const content = marker.closest('.doc-outline-content');
+          const activeRect = active.getBoundingClientRect();
+          const contentRect = content ? content.getBoundingClientRect() : { top: 0 };
+          const markerTop = activeRect.top - contentRect.top + (activeRect.height - (marker.offsetHeight || 18)) / 2;
+          marker.style.opacity = '1';
+          marker.style.top = Math.max(0, Math.round(markerTop)) + 'px';
+        }
+      };
+      window.addEventListener('scroll', () => requestAnimationFrame(setActive), { passive: true });
+      window.addEventListener('resize', setActive);
+      setActive();
+    })();
+  </script>
+  <script src="../lumatrace/code-copy.js?v=20260621-lumatrace-wiki-v4" defer></script>
+  <script src="../lumatrace/floating-nav.js?v=20260622-bottom-pill-nav" defer></script>
+  <script src="../lumatrace/reference-effects.js?v=20260622-no-link-card-v2" defer></script>
+  <script src="../lumatrace/top-nav-indicator.js?v=20260621-lumatrace-wiki-v4" defer></script>
+</body>
+</html>
