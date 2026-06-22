@@ -163,7 +163,7 @@
     return items;
   };
 
-  const getWords = (canvas) => (canvas.dataset.words || 'WELCOME TO|SWIFTSHOT-WIKI|DESIGN BY|BBONG9')
+  const getWords = (canvas) => (canvas.dataset.words || 'WELCOME TO|SWIFTSHOT|DESIGN BY|BBONG9')
     .split('|')
     .map((word) => word.trim().toUpperCase())
     .filter(Boolean);
@@ -200,7 +200,7 @@
 
   const startIntro = (section) => {
     const canvas = section.querySelector('[data-intro-particle]');
-    const home = document.querySelector('.layout.is-home');
+    const home = document.querySelector('.layout.is-home, .wiki-home-content');
     if (!canvas || !home) return;
 
     const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });

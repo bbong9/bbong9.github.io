@@ -2023,3 +2023,364 @@ body.ss-ref-page{background:var(--ss-ref-canvas)}
 .dark .ss-ref-page .sidebar-item.level-1 .link{background:rgba(21,26,44,.66)!important;border-color:rgba(148,163,184,.22)!important;color:#cbd5e1!important}
 .ss-ref-page .sidebar-item.level-1.is-active .link{background:var(--ss-ref-blue)!important;border-color:var(--ss-ref-blue)!important;color:#fff!important;box-shadow:0 12px 28px rgba(79,107,255,.22)!important}
 .ss-ref-page .sidebar-item.level-1 .text{margin:0!important;font-size:13px!important;font-weight:800!important;line-height:1!important;color:inherit!important}
+
+/* 20260622 bottom floating capsule nav
+   The wiki section chip navigation now lives at the bottom of the viewport.
+   It appears while scrolling and hides itself shortly after scrolling stops. */
+:root{
+  --wiki-bottom-nav-bottom:max(18px, env(safe-area-inset-bottom));
+  --wiki-bottom-nav-ease:cubic-bezier(.2,.75,.2,1);
+  --wiki-bottom-nav-bg:linear-gradient(180deg,rgba(255,255,255,.90),rgba(255,255,255,.72));
+  --wiki-bottom-nav-border:rgba(215,225,245,.74);
+  --wiki-bottom-nav-shadow:inset 0 1px 0 rgba(255,255,255,.92),0 18px 54px rgba(50,70,120,.18),0 4px 16px rgba(50,70,120,.10);
+}
+.dark{
+  --wiki-bottom-nav-bg:linear-gradient(180deg,rgba(28,33,52,.88),rgba(13,18,34,.76));
+  --wiki-bottom-nav-border:rgba(148,163,184,.24);
+  --wiki-bottom-nav-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 20px 58px rgba(0,0,0,.34),0 0 26px rgba(92,115,231,.12);
+}
+.ss-ref-page .layout.has-sidebar{
+  padding-top:var(--vp-nav-height)!important;
+}
+.ss-ref-page .sidebar{
+  position:fixed!important;
+  top:auto!important;
+  right:auto!important;
+  bottom:var(--wiki-bottom-nav-bottom)!important;
+  left:50%!important;
+  z-index:120!important;
+  width:min(1120px,calc(100vw - 32px))!important;
+  max-width:calc(100vw - 32px)!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:8px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  border:1px solid var(--wiki-bottom-nav-border)!important;
+  border-radius:999px!important;
+  background:var(--wiki-bottom-nav-bg)!important;
+  box-shadow:var(--wiki-bottom-nav-shadow)!important;
+  backdrop-filter:blur(22px) saturate(1.45)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(1.45)!important;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none!important;
+  transform:translate3d(-50%,calc(100% + 42px),0) scale(.985);
+  transform-origin:50% 100%;
+  transition:transform .38s var(--wiki-bottom-nav-ease),opacity .24s ease,visibility 0s linear .38s,box-shadow .24s ease!important;
+  scrollbar-width:none;
+}
+.ss-ref-page .sidebar::-webkit-scrollbar{display:none}
+.ss-ref-page .sidebar.is-visible,
+.ss-ref-page .sidebar:focus-within{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto!important;
+  transform:translate3d(-50%,0,0) scale(1);
+  transition:transform .38s var(--wiki-bottom-nav-ease),opacity .22s ease,visibility 0s linear 0s,box-shadow .24s ease!important;
+}
+.ss-ref-page .sidebar-tree{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  width:max-content!important;
+  min-width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+.ss-ref-page .sidebar-tree>.sidebar-item.level-0{display:contents!important;padding:0!important;margin:0!important}
+.ss-ref-page .sidebar-tree>.sidebar-item.level-0>.sidebar-entry{display:none!important}
+.ss-ref-page .sidebar-tree>.sidebar-item.level-0>.items{display:flex!important;align-items:center!important;gap:8px!important;border:0!important;padding:0!important;margin:0!important}
+.ss-ref-page .sidebar-item.level-1{display:block!important;flex:0 0 auto!important;margin:0!important;padding:0!important}
+.ss-ref-page .sidebar-item.level-1>.sidebar-entry{display:block!important;margin:0!important;padding:0!important}
+.ss-ref-page .sidebar-item.level-1 .indicator{display:none!important}
+.ss-ref-page .sidebar-item.level-1 .link{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:44px!important;
+  height:42px!important;
+  padding:0 16px!important;
+  border:1px solid color-mix(in srgb,var(--ss-ref-border) 86%,transparent)!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.58)!important;
+  color:var(--ss-ref-slate)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.56),0 6px 16px rgba(50,70,120,.07)!important;
+  white-space:nowrap!important;
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease,transform .18s ease!important;
+  touch-action:manipulation;
+}
+.ss-ref-page .sidebar-item.level-1 .link:hover{
+  transform:translateY(-1px);
+  color:var(--ss-ref-ink)!important;
+  border-color:color-mix(in srgb,var(--ss-ref-blue) 25%,var(--ss-ref-border))!important;
+  background:rgba(255,255,255,.86)!important;
+}
+.ss-ref-page .sidebar-item.level-1.is-active .link{
+  background:linear-gradient(135deg,var(--ss-ref-blue),var(--ss-ref-blue-deep))!important;
+  border-color:rgba(255,255,255,.42)!important;
+  color:#fff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 12px 28px rgba(79,107,255,.30)!important;
+}
+.dark .ss-ref-page .sidebar-item.level-1 .link{
+  background:rgba(21,26,44,.70)!important;
+  border-color:rgba(148,163,184,.24)!important;
+  color:#cbd5e1!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 8px 18px rgba(0,0,0,.18)!important;
+}
+.dark .ss-ref-page .sidebar-item.level-1 .link:hover{
+  background:rgba(36,43,68,.92)!important;
+  color:#f8fafc!important;
+  border-color:rgba(168,177,255,.36)!important;
+}
+.dark .ss-ref-page .sidebar-item.level-1.is-active .link{
+  background:linear-gradient(135deg,var(--ss-ref-blue),#6d5dfc)!important;
+  border-color:rgba(255,255,255,.18)!important;
+  color:#fff!important;
+}
+.ss-ref-page .sidebar-item.level-1 .text{
+  margin:0!important;
+  font-size:14px!important;
+  font-weight:820!important;
+  line-height:1!important;
+  letter-spacing:-.012em!important;
+  color:inherit!important;
+}
+@media(max-width:720px){
+  .ss-ref-page .sidebar{
+    bottom:max(12px, env(safe-area-inset-bottom))!important;
+    width:calc(100vw - 20px)!important;
+    max-width:calc(100vw - 20px)!important;
+    padding:7px!important;
+    border-radius:24px!important;
+  }
+  .ss-ref-page .sidebar-tree{justify-content:flex-start!important;min-width:max-content!important}
+  .ss-ref-page .sidebar-item.level-1 .link{height:40px!important;padding:0 14px!important}
+  .ss-ref-page .sidebar-item.level-1 .text{font-size:13px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .ss-ref-page .sidebar{transition:none!important;transform:translate3d(-50%,calc(100% + 42px),0)!important}
+  .ss-ref-page .sidebar.is-visible,.ss-ref-page .sidebar:focus-within{transform:translate3d(-50%,0,0)!important}
+}
+
+/* 20260622 home hero single CTA */
+.wiki-hero-bottom .wiki-hero-actions-single{
+  justify-content:center;
+  width:100%;
+}
+.wiki-hero-bottom .wiki-hero-actions-single .primary{
+  min-width:148px;
+}
+@media(max-width:760px){
+  .wiki-hero-bottom .wiki-hero-actions-single .primary{
+    width:auto;
+    min-width:148px;
+  }
+}
+
+/* 20260622 CineChill source transplant for SwiftShot home intro/title/CTA
+   Source basis: /Users/bbong9/Desktop/cinechill-wiki index + cinechill/wiki.css.
+   Only text, scope, and spacing are adapted for SwiftShot. */
+html.intro-locked:not(.intro-preparing-home) .wiki-home-content{
+  content-visibility:hidden;
+  contain-intrinsic-size:100vh;
+}
+html.home-reveal-pending .swiftshot-home-hero .eyebrow,
+html.home-reveal-pending .swiftshot-home-hero h1,
+html.home-reveal-pending .swiftshot-home-hero .home-title-letter,
+html.home-reveal-pending .swiftshot-home-hero .home-title-underline,
+html.home-reveal-pending .swiftshot-home-hero .wiki-hero-visual,
+html.home-reveal-pending .swiftshot-home-hero .wiki-hero-bottom,
+html.home-reveal-pending .swiftshot-home-hero .lead,
+html.home-reveal-pending .swiftshot-home-hero .hero-actions,
+html.home-reveal-pending .swiftshot-home-hero .wiki-stat-row{
+  animation-play-state:paused!important;
+}
+.swiftshot-home-hero{
+  text-align:center;
+  isolation:isolate;
+}
+.swiftshot-home-hero .wiki-hero-copy{
+  display:grid;
+  justify-items:center;
+  gap:0;
+}
+.swiftshot-home-hero .wiki-hero-copy .eyebrow{
+  margin-bottom:12px;
+}
+.swiftshot-home-hero .wiki-hero-copy h1.home-animated-title{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:auto;
+  max-width:min(100%,1120px);
+  margin:0 auto;
+  padding-bottom:14px;
+  overflow:visible;
+  background:none!important;
+  color:var(--vp-c-brand-1);
+  -webkit-text-fill-color:currentColor;
+  font-size:clamp(54px,7.3vw,104px);
+  line-height:1.02;
+  font-weight:900;
+  letter-spacing:-.045em;
+  text-align:center;
+}
+.swiftshot-home-hero .home-title-text{
+  --home-title-gradient:linear-gradient(100deg,#2563eb 0%,#06b6d4 24%,#8b5cf6 50%,#ec4899 74%,#f59e0b 100%);
+  display:flex;
+  justify-content:center;
+  overflow:hidden;
+  white-space:nowrap;
+  color:var(--vp-c-brand-1);
+  -webkit-text-fill-color:initial;
+}
+.swiftshot-home-hero .home-title-letter{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(20px);
+  background:var(--home-title-gradient);
+  background-size:1000% 100%;
+  background-position:calc(var(--letter-index) * 7.7%) 50%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:var(--vp-c-brand-1);
+  -webkit-text-fill-color:transparent;
+  animation:homeTitleLetterIn .62s cubic-bezier(.22,1,.36,1) forwards;
+  animation-delay:calc(1s + var(--letter-index) * .075s);
+  will-change:transform,opacity;
+}
+.dark .swiftshot-home-hero .home-title-text{
+  --home-title-gradient:linear-gradient(100deg,#93c5fd 0%,#22d3ee 24%,#a78bfa 50%,#f0abfc 74%,#fbbf24 100%);
+}
+.swiftshot-home-hero .home-title-underline{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:0;
+  height:4px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#3b82f6 0%,#a855f7 52%,#ec4899 100%);
+  box-shadow:0 8px 22px rgba(99,102,241,.24);
+  animation:homeTitleUnderlineIn .8s ease-out forwards;
+  animation-delay:2.16s;
+}
+.swiftshot-home-hero .eyebrow,
+.swiftshot-home-hero h1,
+.swiftshot-home-hero .wiki-hero-visual,
+.swiftshot-home-hero .wiki-hero-bottom{
+  opacity:0;
+  transform:translateY(20px);
+  animation:contentSlideUp 1s cubic-bezier(.16,1,.3,1) forwards;
+}
+.swiftshot-home-hero .eyebrow{animation-delay:.75s}
+.swiftshot-home-hero h1{animation-delay:.85s}
+.swiftshot-home-hero .wiki-hero-visual{animation-delay:1.02s}
+.swiftshot-home-hero .wiki-hero-bottom{animation-delay:1.18s}
+.swiftshot-home-hero .wiki-hero-bottom .wiki-hero-actions{
+  gap:0;
+  margin:0;
+}
+.swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button,
+.swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button.primary{
+  position:relative;
+  isolation:isolate;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:184px;
+  min-width:184px;
+  height:50px;
+  padding:0 30px;
+  border:0!important;
+  border-radius:14px;
+  background:#050505!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  font-size:17px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-align:center;
+  white-space:nowrap;
+  overflow:visible;
+  transform:translateZ(0);
+}
+.swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button::before,
+.swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  z-index:-1;
+  border-radius:16px;
+  background:linear-gradient(45deg,#fb0094,#0000ff,#00ff00,#ffff00,#ff0000,#fb0094,#0000ff,#00ff00,#ffff00,#ff0000);
+  background-size:400%;
+  animation:rainbowButtonBorder 20s linear infinite;
+}
+.swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button::after{
+  filter:blur(30px);
+  opacity:.68;
+}
+.swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button:hover{
+  background:#050505!important;
+  color:#fff!important;
+  transform:translateY(-2px);
+}
+.swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button:active{
+  transform:translateY(0) scale(.98);
+}
+.swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button .cta-text{
+  display:block;
+  transform:translateY(-.5px);
+}
+@media(max-width:1180px){
+  .swiftshot-home-hero .wiki-hero-copy h1.home-animated-title{
+    font-size:clamp(46px,9vw,82px);
+  }
+}
+@media(max-width:760px){
+  .swiftshot-home-hero .wiki-hero-copy h1.home-animated-title{
+    max-width:100%;
+    font-size:clamp(38px,11.5vw,58px);
+    letter-spacing:-.05em;
+  }
+  .swiftshot-home-hero .home-title-text{
+    white-space:normal;
+    flex-wrap:wrap;
+    row-gap:0;
+    line-height:1.02;
+  }
+  .swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button,
+  .swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button.primary{
+    width:176px;
+    min-width:176px;
+    height:48px;
+    padding:0 26px;
+    font-size:16px;
+    letter-spacing:.07em;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .swiftshot-home-hero .eyebrow,
+  .swiftshot-home-hero h1,
+  .swiftshot-home-hero .home-title-letter,
+  .swiftshot-home-hero .home-title-underline,
+  .swiftshot-home-hero .wiki-hero-visual,
+  .swiftshot-home-hero .wiki-hero-bottom{
+    animation:none!important;
+    opacity:1!important;
+    transform:none!important;
+  }
+  .swiftshot-home-hero .home-title-underline{left:0;width:100%}
+  .swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button::before,
+  .swiftshot-home-hero .wiki-hero-actions a.rainbow-start-button::after{animation:none!important}
+}
+
+/* Keep CineChill noscript fallback behavior intact after earlier SwiftShot CSS overrides. */
+.intro-start noscript .intro-start-fallback{
+  display:grid!important;
+}

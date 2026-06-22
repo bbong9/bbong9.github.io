@@ -6,11 +6,36 @@
   <title>总览 | SwiftShot Wiki</title>
   <meta name="description" content="SwiftShot Wiki 总览和使用入口">
   <link rel="icon" type="image/png" href="swiftshot/swiftshot-icon.png?v=20260621-swiftshot-wiki-v4">
-  <link rel="stylesheet" href="swiftshot/wiki.css?v=20260622-nav-faq-log">
+  <link rel="stylesheet" href="swiftshot/wiki.css?v=20260622-cinechill-intro-home">
   <script>
     (() => {
       const key = 'swiftshot-wiki-theme';
+      const introKey = 'swiftshot-wiki-intro-entered-at';
+      const introSkipWindow = 5 * 60 * 1000;
+      try {
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      } catch {
+        // Keep native scroll restoration if the browser blocks access.
+      }
       if (localStorage.getItem(key) === 'dark') document.documentElement.classList.add('dark');
+      document.documentElement.classList.add('home-reveal-pending');
+      let shouldSkipIntro = false;
+      try {
+        const introEnteredAt = Number(sessionStorage.getItem(introKey) || 0);
+        shouldSkipIntro = introEnteredAt > 0 && Date.now() - introEnteredAt < introSkipWindow;
+        if (shouldSkipIntro) document.documentElement.classList.add('skip-intro');
+      } catch {
+        // Keep the intro visible if session storage is unavailable.
+      }
+      if (!shouldSkipIntro) {
+        document.documentElement.classList.add('intro-locked');
+        window.scrollTo(0, 0);
+      }
+      window.addEventListener('pageshow', () => {
+        if (document.documentElement.classList.contains('intro-locked')) {
+          window.scrollTo({ top: 0, behavior: 'auto' });
+        }
+      });
       window.addEventListener('DOMContentLoaded', () => {
         const button = document.querySelector('[data-theme-toggle]');
         const sync = () => {
@@ -41,19 +66,37 @@
       </div>
     </div>
   </header>
+  <section class="intro-start" data-intro-start aria-labelledby="intro-start-title">
+    <canvas
+      class="intro-particle-canvas"
+      data-intro-particle
+      data-words="WELCOME TO|SWIFTSHOT|DESIGN BY|BBONG9"
+      aria-hidden="true"
+    ></canvas>
+    <div class="intro-start-vignette" aria-hidden="true"></div>
+    <div class="intro-start-hint" aria-hidden="true">CLICK / SCROLL TO ENTER</div>
+    <h1 id="intro-start-title" class="sr-only">WELCOME TO SWIFTSHOT DESIGN BY BBONG9</h1>
+    <noscript>
+      <p class="intro-start-fallback">WELCOME TO<br>SWIFTSHOT<br>DESIGN BY<br>BBONG9</p>
+    </noscript>
+  </section>
   <main id="VPContent" class="wiki-home-content">
-    <section class="wiki-hero-shell wiki-hero-stacked">
+    <section class="wiki-hero-shell wiki-hero-stacked home-hero swiftshot-home-hero">
       <div class="wiki-hero-copy">
         <p class="eyebrow">macOS 原生截图工具</p>
-        <h1><span class="wiki-title-line">截图、标注、OCR、翻译、长截图和录屏</span><span class="wiki-title-line">一条工作流搞定。</span></h1>
+        <h1 class="home-animated-title" aria-label="SwiftShot Wiki">
+          <span class="home-title-text" aria-hidden="true">
+            <span class="home-title-letter" style="--letter-index:0">S</span><span class="home-title-letter" style="--letter-index:1">w</span><span class="home-title-letter" style="--letter-index:2">i</span><span class="home-title-letter" style="--letter-index:3">f</span><span class="home-title-letter" style="--letter-index:4">t</span><span class="home-title-letter" style="--letter-index:5">S</span><span class="home-title-letter" style="--letter-index:6">h</span><span class="home-title-letter" style="--letter-index:7">o</span><span class="home-title-letter" style="--letter-index:8">t</span><span class="home-title-letter" style="--letter-index:9">&nbsp;</span><span class="home-title-letter" style="--letter-index:10">W</span><span class="home-title-letter" style="--letter-index:11">i</span><span class="home-title-letter" style="--letter-index:12">k</span><span class="home-title-letter" style="--letter-index:13">i</span>
+          </span>
+          <span class="home-title-underline" aria-hidden="true"></span>
+        </h1>
       </div>
       <div class="wiki-hero-visual">
-        <img decoding="async" src="swiftshot/screenshots/app-main-capture.png?v=20260621-main-real-blue" alt="SwiftShot 主界面：快捷键唤起后框选截图区域，底部工具栏可直接标注、OCR、复制和保存">
+        <img decoding="async" src="swiftshot/screenshots/app-main-capture.png?v=20260622-dark-captures" alt="SwiftShot 主界面：快捷键唤起后框选截图区域，底部工具栏可直接标注、OCR、复制和保存">
       </div>
       <div class="wiki-hero-bottom">
-        <div class="wiki-hero-actions">
-          <a class="primary" href="wiki/quickstart.html">开始使用</a>
-          <a class="secondary" href="wiki/capture.html">看截图工作流</a>
+        <div class="wiki-hero-actions wiki-hero-actions-single">
+          <a class="primary rainbow-start-button" href="wiki/quickstart.html"><span class="cta-text">立即开始</span></a>
         </div>
         <div class="wiki-stat-row"><span>快捷截图</span><span>本地 OCR</span><span>隐私打码</span><span>微信同步</span></div>
         <p class="lead">SwiftShot 面向日常办公、产品反馈、教程制作和隐私打码：按快捷键框选，直接标注或识别文字，最后复制、保存、贴图或进入长截图/录屏。</p>
@@ -80,11 +123,12 @@
           <li><b>OCR/翻译/同步</b><span>配置 Provider 和 API Key 后，再开启跨设备同步备份。</span></li>
         </ol>
       </div>
-      <figure class="screenshot pro-screenshot"><img loading="lazy" decoding="async" src="swiftshot/screenshots/settings-general.png?v=20260621-real-ui" alt="SwiftShot 设置常规界面"><figcaption>常规设置集中展示启动行为、外观、权限状态和常用入口。</figcaption></figure>
+      <figure class="screenshot pro-screenshot"><img loading="lazy" decoding="async" src="swiftshot/screenshots/settings-general.png?v=20260622-dark-captures" alt="SwiftShot 设置常规界面"><figcaption>常规设置集中展示启动行为、外观、权限状态和常用入口。</figcaption></figure>
     </section>
   </main>
+  <script defer src="swiftshot/intro-particle-text.js?v=20260622-cinechill-intro-home"></script>
   <script src="swiftshot/code-copy.js?v=20260621-swiftshot-wiki-v4" defer></script>
-  <script src="swiftshot/floating-nav.js?v=20260622-no-link-card-v2" defer></script>
+  <script src="swiftshot/floating-nav.js?v=20260622-bottom-pill-nav" defer></script>
   <script src="swiftshot/top-nav-indicator.js?v=20260621-swiftshot-wiki-v4" defer></script>
 </body>
 </html>
