@@ -2384,3 +2384,18 @@ html.home-reveal-pending .swiftshot-home-hero .wiki-stat-row{
 .intro-start noscript .intro-start-fallback{
   display:grid!important;
 }
+
+/* 20260622 intro immersive fix
+   CineChill startup page is a fullscreen entry state; SwiftShot nav must not sit above it. */
+html.intro-locked .VPNav.wiki-nav,
+html.home-reveal-pending:not(.skip-intro) .VPNav.wiki-nav{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  transform:translateY(-18px)!important;
+  transition:none!important;
+}
+html.intro-locked .intro-start,
+html.home-reveal-pending:not(.skip-intro) .intro-start{
+  z-index:1000!important;
+}
