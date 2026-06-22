@@ -2364,6 +2364,35 @@ html.home-reveal-pending .lumatrace-home-hero .wiki-stat-row{
     letter-spacing:.07em;
   }
 }
+
+/* 20260622 homepage title cleanup: product name only, no "Wiki" suffix. */
+.lumatrace-home-hero .wiki-hero-copy h1.home-animated-title{
+  max-width:min(100%,920px);
+  font-size:clamp(68px,8.2vw,118px);
+  letter-spacing:-.035em;
+}
+.lumatrace-home-hero .home-title-letter{
+  background-position:calc(var(--letter-index) * 11.5%) 50%;
+}
+.lumatrace-home-hero .home-title-underline{
+  height:5px;
+  max-width:86%;
+}
+.VPNav.wiki-nav .brand{
+  padding-right:12px;
+}
+@media(max-width:1180px){
+  .lumatrace-home-hero .wiki-hero-copy h1.home-animated-title{
+    font-size:clamp(52px,10vw,92px);
+  }
+}
+@media(max-width:760px){
+  .lumatrace-home-hero .wiki-hero-copy h1.home-animated-title{
+    font-size:clamp(42px,13vw,68px);
+    letter-spacing:-.035em;
+  }
+}
+
 @media(prefers-reduced-motion:reduce){
   .lumatrace-home-hero .eyebrow,
   .lumatrace-home-hero h1,
