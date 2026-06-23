@@ -149,36 +149,25 @@
 
   stages.forEach((stage) => {
     let sleepTimer = 0;
-    const hoverZone = stage.querySelector('.download-cat-hover-zone') || stage;
+    const clickZone = stage.querySelector('.download-cat-hover-zone') || stage;
+    const downloadButton = stage.querySelector('.download-stage-button');
     const wakeCat = () => {
       if (sleepTimer) window.clearTimeout(sleepTimer);
-      sleepTimer = 0;
-      if (!stage.classList.contains('is-cat-awake')) {
-        setAwake(stage, true);
-      }
+      setAwake(stage, true);
+      sleepTimer = window.setTimeout(() => setAwake(stage, false), 2600);
     };
     const sleepCat = () => {
       if (sleepTimer) window.clearTimeout(sleepTimer);
-      sleepTimer = window.setTimeout(() => setAwake(stage, false), 180);
+      sleepTimer = 0;
+      setAwake(stage, false);
     };
 
-    // Only the bottom cat area wakes the mascot. Listen on the stage so the
-    // button/cat artwork cannot cover the invisible hover zone, but gate by the
-    // bottom-zone Y position so entering the section itself keeps the cat tucked.
-    const handleStagePointerMove = (event) => {
-      const zoneRect = hoverZone.getBoundingClientRect();
-      if (event.clientY >= zoneRect.top - 8 && event.clientY <= zoneRect.bottom + 18) {
-        wakeCat();
-      } else if (stage.classList.contains('is-cat-awake')) {
-        sleepCat();
-      }
-    };
-    stage.addEventListener('pointermove', handleStagePointerMove, { passive: true });
+    // v8: no hover reveal. The mascot stays tucked by default and only climbs
+    // out after an intentional click on the download CTA or on the paw/cat area.
+    clickZone.addEventListener('click', wakeCat);
+    downloadButton?.addEventListener('click', wakeCat);
     stage.addEventListener('pointerleave', sleepCat, { passive: true });
-    hoverZone.addEventListener('pointerenter', wakeCat, { passive: true });
-    hoverZone.addEventListener('pointerleave', sleepCat, { passive: true });
-    hoverZone.addEventListener('focusin', wakeCat);
-    hoverZone.addEventListener('focusout', sleepCat);
+    window.addEventListener('blur', sleepCat);
   });
 
   window.addEventListener('scroll', scheduleAlign, { passive: true });

@@ -3154,3 +3154,29 @@ html.home-reveal-pending:not(.skip-intro) .intro-start{
 .lumatrace-download-stage:not(.is-cat-awake):not(:focus-within) .download-cat-art{
   animation:none!important;
 }
+
+
+/* 20260623 cat click-only interaction: no hover reveal, only paws/button click. */
+.download-cat-hover-zone{
+  height:clamp(170px,22vh,280px)!important;
+  cursor:pointer;
+}
+.download-cat-peek-paws{
+  pointer-events:none!important;
+}
+.lumatrace-download-stage:not(.is-cat-awake) .download-cat-peek-paws{
+  opacity:1!important;
+}
+.lumatrace-download-stage.is-in-view:not(.is-cat-awake) .download-cat,
+.lumatrace-download-stage.is-in-view:hover:not(.is-cat-awake) .download-cat,
+.lumatrace-download-stage.is-in-view:focus-within:not(.is-cat-awake) .download-cat{
+  transform:translateX(-50%) translateY(var(--download-cat-peek-y)) scale(.965)!important;
+}
+.lumatrace-download-stage:hover:not(.is-cat-awake) .download-cat-art,
+.lumatrace-download-stage:focus-within:not(.is-cat-awake) .download-cat-art,
+.lumatrace-download-stage:not(.is-cat-awake) .download-cat-art{
+  animation:none!important;
+}
+.lumatrace-download-stage.is-cat-awake .download-cat-peek-paws{
+  opacity:0!important;
+}
