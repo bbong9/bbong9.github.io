@@ -2867,3 +2867,202 @@ html.home-reveal-pending:not(.skip-intro) .intro-start{
 .lumatrace-download-stage{
   padding-top:clamp(132px,12vh,168px);
 }
+
+/* 20260623 reference cat mascot: use the user-provided illustrated cat on the live GitHub Pages site. */
+.download-cat-hover-zone{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:3;
+  height:clamp(180px,28vh,380px);
+  pointer-events:auto;
+  background:transparent;
+}
+.download-cat-peek-paws{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  z-index:3;
+  width:clamp(420px,31.5vw,640px);
+  aspect-ratio:833/636;
+  transform:translateX(-50%);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .24s ease;
+}
+.download-cat-peek-paw{
+  position:absolute;
+  bottom:-1px;
+  width:22%;
+  height:18%;
+  border-radius:48% 48% 36% 36% / 62% 62% 34% 34%;
+  background:
+    radial-gradient(ellipse at 30% 38%,rgba(255,255,255,.86),transparent 42%),
+    linear-gradient(180deg,#fff 0%,#faf7f0 54%,#d7d0cb 100%);
+  box-shadow:
+    inset 0 -8px 14px rgba(51,42,36,.13),
+    0 -1px 0 rgba(20,17,20,.52),
+    0 12px 24px rgba(48,18,102,.18);
+  transform-origin:50% 100%;
+}
+.download-cat-peek-paw::before,
+.download-cat-peek-paw::after{
+  content:"";
+  position:absolute;
+  top:20%;
+  width:2px;
+  height:44%;
+  border-radius:999px;
+  background:rgba(31,27,28,.44);
+  filter:blur(.15px);
+}
+.download-cat-peek-paw::before{left:38%}
+.download-cat-peek-paw::after{right:38%}
+.peek-paw-left{left:8%;transform:rotate(-5deg) translateY(18%)}
+.peek-paw-right{right:8%;transform:rotate(5deg) translateY(18%)}
+.lumatrace-download-stage.is-in-view.is-cat-positioned .download-cat-peek-paws{opacity:1}
+.lumatrace-download-stage.is-cat-awake .download-cat-peek-paws,
+.lumatrace-download-stage:focus-within .download-cat-peek-paws{opacity:0;transition-duration:.12s}
+.lumatrace-download-stage .download-cat{
+  --download-cat-peek-y:0px;
+  --download-cat-awake-y:0px;
+  position:absolute;
+  left:50%;
+  bottom:clamp(-22px,-1.15vw,-10px);
+  width:clamp(420px,31.5vw,640px);
+  aspect-ratio:833/636;
+  z-index:2;
+  pointer-events:none;
+  opacity:0;
+  transform:translateX(-50%) translateY(var(--download-cat-peek-y)) scale(.965);
+  transform-origin:50% 100%;
+  animation:none!important;
+  transition:none;
+  will-change:transform,opacity;
+}
+.lumatrace-download-stage.is-in-view.is-cat-positioned .download-cat{
+  opacity:1;
+  transition:transform 1.12s cubic-bezier(.16,1.14,.18,1),opacity .24s ease;
+}
+.lumatrace-download-stage.is-in-view.is-cat-awake .download-cat,
+.lumatrace-download-stage.is-in-view:focus-within .download-cat{
+  transform:translateX(-50%) translateY(var(--download-cat-awake-y)) scale(1);
+}
+.download-cat-art{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center bottom;
+  transform-origin:50% 100%;
+  filter:drop-shadow(0 24px 34px rgba(47,18,102,.24));
+  will-change:transform,filter;
+}
+.download-cat-tail,
+.download-cat-body{display:none!important}
+.lumatrace-download-stage.is-cat-awake .download-cat-art,
+.lumatrace-download-stage:focus-within .download-cat-art{
+  animation:referenceCatPress 1.18s cubic-bezier(.16,1.12,.18,1) both,referenceCatIdle 5.2s ease-in-out 1.25s infinite;
+}
+.download-cat::before{
+  content:"";
+  position:absolute;
+  left:6%;
+  right:6%;
+  bottom:1.8%;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,rgba(18,16,24,.42) 16%,rgba(18,16,24,.48) 84%,transparent);
+  opacity:.72;
+  transform:scaleX(.96);
+  transform-origin:50% 50%;
+  transition:opacity .34s ease,transform .72s cubic-bezier(.16,1.08,.2,1);
+}
+.lumatrace-download-stage.is-cat-awake .download-cat::before,
+.lumatrace-download-stage:focus-within .download-cat::before{opacity:.86;transform:scaleX(1.02)}
+.download-cat::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-2%;
+  z-index:-1;
+  width:72%;
+  height:9%;
+  border-radius:999px;
+  background:radial-gradient(ellipse at center,rgba(55,20,120,.28),rgba(55,20,120,0) 72%);
+  filter:blur(12px);
+  opacity:.68;
+  transform:translateX(-50%) scale(.88);
+  transition:opacity .38s ease,transform .72s cubic-bezier(.16,1.08,.2,1);
+}
+.lumatrace-download-stage.is-cat-awake .download-cat::after,
+.lumatrace-download-stage:focus-within .download-cat::after{opacity:.88;transform:translateX(-50%) scale(1.04)}
+.download-cat-blink-eye{
+  position:absolute;
+  z-index:2;
+  top:51.8%;
+  width:12.6%;
+  height:15.8%;
+  border-radius:50%;
+  background:linear-gradient(180deg,#d8d4ce 0%,#f4eee8 58%,#c7c0b9 100%);
+  box-shadow:inset 0 7px 9px rgba(255,255,255,.48),0 0 0 1px rgba(20,18,20,.12);
+  opacity:0;
+  transform:scaleY(.04);
+  transform-origin:50% 50%;
+  pointer-events:none;
+}
+.blink-left{left:28.2%}
+.blink-right{right:28.2%}
+.lumatrace-download-stage.is-cat-awake .download-cat-blink-eye,
+.lumatrace-download-stage:focus-within .download-cat-blink-eye{animation:referenceCatBlink 5.8s ease-in-out 1.65s infinite}
+@keyframes referenceCatPress{
+  0%{transform:translateY(34px) scale(.965,1.035);filter:drop-shadow(0 18px 26px rgba(47,18,102,.16))}
+  42%{transform:translateY(-10px) scale(1.018,.982);filter:drop-shadow(0 30px 40px rgba(47,18,102,.26))}
+  58%{transform:translateY(12px) scale(1.035,.93);filter:drop-shadow(0 16px 22px rgba(47,18,102,.22))}
+  74%{transform:translateY(-4px) scale(.99,1.012)}
+  100%{transform:translateY(0) scale(1);filter:drop-shadow(0 24px 34px rgba(47,18,102,.24))}
+}
+@keyframes referenceCatIdle{
+  0%,100%{transform:translateY(0) rotate(0deg) scale(1)}
+  36%{transform:translateY(-5px) rotate(-.35deg) scale(1.004)}
+  68%{transform:translateY(2px) rotate(.28deg) scale(.998)}
+}
+@keyframes referenceCatBlink{
+  0%,86%,100%{opacity:0;transform:scaleY(.04)}
+  88%{opacity:.95;transform:scaleY(1)}
+  90%{opacity:0;transform:scaleY(.04)}
+  94%{opacity:0;transform:scaleY(.04)}
+  95.5%{opacity:.92;transform:scaleY(1)}
+  97%{opacity:0;transform:scaleY(.04)}
+}
+@media(min-width:900px) and (max-height:700px){
+  .lumatrace-download-stage .download-cat,
+  .download-cat-peek-paws{bottom:clamp(-12px,-.72vw,-6px);width:clamp(230px,14.8vw,320px)}
+}
+@media(max-width:760px){
+  .lumatrace-download-stage .download-cat,
+  .download-cat-peek-paws{bottom:-10px;width:min(390px,88vw)}
+}
+@media(prefers-reduced-motion:reduce){
+  .lumatrace-download-stage .download-cat,
+  .download-cat-art,
+  .download-cat-peek-paws,
+  .download-cat-peek-paw,
+  .download-cat::before,
+  .download-cat::after{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+
+/* 20260623 live-site override: beat the older .is-in-view transform so the reference cat stays hidden until hover. */
+.lumatrace-download-stage.is-in-view .download-cat{
+  transform:translateX(-50%) translateY(var(--download-cat-peek-y)) scale(.965)!important;
+}
+.lumatrace-download-stage.is-in-view.is-cat-awake .download-cat,
+.lumatrace-download-stage.is-in-view:focus-within .download-cat{
+  transform:translateX(-50%) translateY(var(--download-cat-awake-y)) scale(1)!important;
+}
