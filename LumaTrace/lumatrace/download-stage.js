@@ -149,6 +149,7 @@
 
   stages.forEach((stage) => {
     let sleepTimer = 0;
+    const hoverZone = stage.querySelector('.download-cat-hover-zone') || stage;
     const wakeCat = () => {
       if (sleepTimer) window.clearTimeout(sleepTimer);
       sleepTimer = 0;
@@ -158,17 +159,26 @@
     };
     const sleepCat = () => {
       if (sleepTimer) window.clearTimeout(sleepTimer);
-      sleepTimer = window.setTimeout(() => setAwake(stage, false), 140);
+      sleepTimer = window.setTimeout(() => setAwake(stage, false), 180);
     };
 
-    // Make the whole download card an interaction surface. Previously only a
-    // thin invisible bottom zone could wake the cat, so hovering over the paws
-    // or the purple card often felt broken.
-    stage.addEventListener('pointerenter', wakeCat, { passive: true });
-    stage.addEventListener('pointermove', wakeCat, { passive: true });
+    // Only the bottom cat area wakes the mascot. Listen on the stage so the
+    // button/cat artwork cannot cover the invisible hover zone, but gate by the
+    // bottom-zone Y position so entering the section itself keeps the cat tucked.
+    const handleStagePointerMove = (event) => {
+      const zoneRect = hoverZone.getBoundingClientRect();
+      if (event.clientY >= zoneRect.top - 8 && event.clientY <= zoneRect.bottom + 18) {
+        wakeCat();
+      } else if (stage.classList.contains('is-cat-awake')) {
+        sleepCat();
+      }
+    };
+    stage.addEventListener('pointermove', handleStagePointerMove, { passive: true });
     stage.addEventListener('pointerleave', sleepCat, { passive: true });
-    stage.addEventListener('focusin', wakeCat);
-    stage.addEventListener('focusout', sleepCat);
+    hoverZone.addEventListener('pointerenter', wakeCat, { passive: true });
+    hoverZone.addEventListener('pointerleave', sleepCat, { passive: true });
+    hoverZone.addEventListener('focusin', wakeCat);
+    hoverZone.addEventListener('focusout', sleepCat);
   });
 
   window.addEventListener('scroll', scheduleAlign, { passive: true });

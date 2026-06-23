@@ -3097,18 +3097,15 @@ html.home-reveal-pending:not(.skip-intro) .intro-start{
 .lumatrace-download-stage.is-in-view .lumatrace-download-card{
   border-radius:42px 42px 0 0!important;
 }
-.lumatrace-download-stage:hover .download-cat-peek-paws,
 .lumatrace-download-stage.is-cat-awake .download-cat-peek-paws,
 .lumatrace-download-stage:focus-within .download-cat-peek-paws{
   opacity:0!important;
   transition-duration:.12s!important;
 }
-.lumatrace-download-stage.is-in-view:hover .download-cat,
 .lumatrace-download-stage.is-in-view.is-cat-awake .download-cat,
 .lumatrace-download-stage.is-in-view:focus-within .download-cat{
   transform:translateX(-50%) translateY(var(--download-cat-awake-y)) scale(1)!important;
 }
-.lumatrace-download-stage:hover .download-cat-art,
 .lumatrace-download-stage.is-cat-awake .download-cat-art,
 .lumatrace-download-stage:focus-within .download-cat-art{
   animation:referenceCatPress 1.18s cubic-bezier(.16,1.12,.18,1) both,referenceCatIdle 5.2s ease-in-out 1.25s infinite!important;
@@ -3137,8 +3134,23 @@ html.home-reveal-pending:not(.skip-intro) .intro-start{
 .download-stage-button{
   z-index:4!important;
 }
-.lumatrace-download-stage.is-in-view:hover .download-cat,
 .lumatrace-download-stage.is-in-view.is-cat-awake .download-cat,
 .lumatrace-download-stage.is-in-view:focus-within .download-cat{
   opacity:1!important;
+}
+
+
+/* 20260623 cat interaction zone: stay tucked until pointer approaches the bottom mascot area. */
+.download-cat-hover-zone{
+  height:clamp(150px,20vh,260px)!important;
+  cursor:default;
+}
+.lumatrace-download-stage:not(.is-cat-awake) .download-cat-peek-paws{
+  opacity:1!important;
+}
+.lumatrace-download-stage.is-in-view:not(.is-cat-awake):not(:focus-within) .download-cat{
+  transform:translateX(-50%) translateY(var(--download-cat-peek-y)) scale(.965)!important;
+}
+.lumatrace-download-stage:not(.is-cat-awake):not(:focus-within) .download-cat-art{
+  animation:none!important;
 }
