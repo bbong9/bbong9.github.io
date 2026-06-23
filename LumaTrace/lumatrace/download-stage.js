@@ -46,14 +46,16 @@
       const peekY = peekTop - baseTop;
 
       const awakeReveal = isShortViewport
-        ? (hasRoomForPeek ? clamp(layoutHeight * 0.30, 92, 128) : 0)
-        : clamp(layoutHeight * 1.00, 470, 520);
+        ? (hasRoomForPeek ? clamp(layoutHeight * 0.42, 138, 190) : clamp(layoutHeight * 0.30, 96, 142))
+        : clamp(layoutHeight * 0.48, 220, 300);
       const bottomAnchoredTop = targetBottom - awakeReveal + bottomOverlap;
       const buttonGap = isShortViewport
         ? clamp(window.innerHeight * 0.024, 12, 20)
-        : clamp(window.innerHeight * 0.055, 58, 84);
+        : clamp(window.innerHeight * 0.038, 34, 58);
+      const roomBelowButtonForCat = buttonRect ? targetBottom - buttonRect.bottom : Infinity;
       const buttonSafeTop = buttonRect ? buttonRect.bottom + buttonGap : bottomAnchoredTop;
-      const awakeTop = Math.max(bottomAnchoredTop, buttonSafeTop);
+      const canPlaceBelowButton = roomBelowButtonForCat > awakeReveal + buttonGap * 0.5;
+      const awakeTop = canPlaceBelowButton ? Math.max(bottomAnchoredTop, buttonSafeTop) : bottomAnchoredTop;
 
       cat.style.setProperty('--download-cat-peek-y', `${peekY.toFixed(2)}px`);
       cat.style.setProperty('--download-cat-awake-y', `${(awakeTop - baseTop).toFixed(2)}px`);
@@ -146,11 +148,27 @@
   }
 
   stages.forEach((stage) => {
-    const hoverZone = stage.querySelector('.download-cat-hover-zone') || stage;
-    hoverZone.addEventListener('pointerenter', () => setAwake(stage, true), { passive: true });
-    hoverZone.addEventListener('pointerleave', () => setAwake(stage, false), { passive: true });
-    stage.addEventListener('focusin', () => setAwake(stage, true));
-    stage.addEventListener('focusout', () => setAwake(stage, false));
+    let sleepTimer = 0;
+    const wakeCat = () => {
+      if (sleepTimer) window.clearTimeout(sleepTimer);
+      sleepTimer = 0;
+      if (!stage.classList.contains('is-cat-awake')) {
+        setAwake(stage, true);
+      }
+    };
+    const sleepCat = () => {
+      if (sleepTimer) window.clearTimeout(sleepTimer);
+      sleepTimer = window.setTimeout(() => setAwake(stage, false), 140);
+    };
+
+    // Make the whole download card an interaction surface. Previously only a
+    // thin invisible bottom zone could wake the cat, so hovering over the paws
+    // or the purple card often felt broken.
+    stage.addEventListener('pointerenter', wakeCat, { passive: true });
+    stage.addEventListener('pointermove', wakeCat, { passive: true });
+    stage.addEventListener('pointerleave', sleepCat, { passive: true });
+    stage.addEventListener('focusin', wakeCat);
+    stage.addEventListener('focusout', sleepCat);
   });
 
   window.addEventListener('scroll', scheduleAlign, { passive: true });
