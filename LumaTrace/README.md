@@ -27,3 +27,10 @@ PUBLIC_WIKI_PUSH=1 ./scripts/sync_public_wiki.sh
 ```bash
 PUBLIC_WIKI_SYNC_DOWNLOADS=0 PUBLIC_WIKI_PUSH=1 ./scripts/sync_public_wiki.sh
 ```
+
+预览同步内容但不写入、不提交、不推送：
+
+```bash
+PUBLIC_WIKI_DRY_RUN=1 ./scripts/sync_public_wiki.sh
+```
+
