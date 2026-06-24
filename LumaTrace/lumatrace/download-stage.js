@@ -46,16 +46,14 @@
       const peekY = peekTop - baseTop;
 
       const awakeReveal = isShortViewport
-        ? (hasRoomForPeek ? clamp(layoutHeight * 0.42, 138, 190) : clamp(layoutHeight * 0.30, 96, 142))
-        : clamp(layoutHeight * 0.48, 220, 300);
+        ? (hasRoomForPeek ? clamp(layoutHeight * 0.30, 92, 128) : 0)
+        : clamp(layoutHeight * 1.00, 470, 520);
       const bottomAnchoredTop = targetBottom - awakeReveal + bottomOverlap;
       const buttonGap = isShortViewport
         ? clamp(window.innerHeight * 0.024, 12, 20)
-        : clamp(window.innerHeight * 0.038, 34, 58);
-      const roomBelowButtonForCat = buttonRect ? targetBottom - buttonRect.bottom : Infinity;
+        : clamp(window.innerHeight * 0.055, 58, 84);
       const buttonSafeTop = buttonRect ? buttonRect.bottom + buttonGap : bottomAnchoredTop;
-      const canPlaceBelowButton = roomBelowButtonForCat > awakeReveal + buttonGap * 0.5;
-      const awakeTop = canPlaceBelowButton ? Math.max(bottomAnchoredTop, buttonSafeTop) : bottomAnchoredTop;
+      const awakeTop = Math.max(bottomAnchoredTop, buttonSafeTop);
 
       cat.style.setProperty('--download-cat-peek-y', `${peekY.toFixed(2)}px`);
       cat.style.setProperty('--download-cat-awake-y', `${(awakeTop - baseTop).toFixed(2)}px`);
@@ -148,26 +146,11 @@
   }
 
   stages.forEach((stage) => {
-    let sleepTimer = 0;
-    const clickZone = stage.querySelector('.download-cat-hover-zone') || stage;
-    const downloadButton = stage.querySelector('.download-stage-button');
-    const wakeCat = () => {
-      if (sleepTimer) window.clearTimeout(sleepTimer);
-      setAwake(stage, true);
-      sleepTimer = window.setTimeout(() => setAwake(stage, false), 2600);
-    };
-    const sleepCat = () => {
-      if (sleepTimer) window.clearTimeout(sleepTimer);
-      sleepTimer = 0;
-      setAwake(stage, false);
-    };
-
-    // v8: no hover reveal. The mascot stays tucked by default and only climbs
-    // out after an intentional click on the download CTA or on the paw/cat area.
-    clickZone.addEventListener('click', wakeCat);
-    downloadButton?.addEventListener('click', wakeCat);
-    stage.addEventListener('pointerleave', sleepCat, { passive: true });
-    window.addEventListener('blur', sleepCat);
+    const hoverZone = stage.querySelector('.download-cat-hover-zone') || stage;
+    hoverZone.addEventListener('pointerenter', () => setAwake(stage, true), { passive: true });
+    hoverZone.addEventListener('pointerleave', () => setAwake(stage, false), { passive: true });
+    stage.addEventListener('focusin', () => setAwake(stage, true));
+    stage.addEventListener('focusout', () => setAwake(stage, false));
   });
 
   window.addEventListener('scroll', scheduleAlign, { passive: true });
