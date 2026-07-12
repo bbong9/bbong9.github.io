@@ -2532,6 +2532,7 @@ html.home-reveal-pending:not(.skip-intro) .intro-start{
   position:relative;
   z-index:2;
   display:grid;
+  grid-template-columns:minmax(0,1fr);
   justify-items:center;
   width:min(980px,calc(100% - 40px));
   margin:clamp(118px,19vh,214px) auto 0;
@@ -2566,6 +2567,15 @@ html.home-reveal-pending:not(.skip-intro) .intro-start{
   letter-spacing:-.025em;
   text-wrap:balance;
 }
+.download-stage-actions{
+  position:relative;
+  z-index:4;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  width:min(620px,100%);
+  margin-top:36px;
+}
 .download-stage-button{
   position:relative;
   z-index:2;
@@ -2575,7 +2585,7 @@ html.home-reveal-pending:not(.skip-intro) .intro-start{
   gap:12px;
   min-width:242px;
   height:78px;
-  margin-top:36px;
+  margin-top:0;
   padding:0 36px;
   border-radius:24px;
   background:#fff;
@@ -2589,6 +2599,9 @@ html.home-reveal-pending:not(.skip-intro) .intro-start{
   transform:translateZ(0);
   transition:transform .34s cubic-bezier(.16,1,.3,1),box-shadow .34s cubic-bezier(.16,1,.3,1),color .28s ease,background-color .28s ease;
   touch-action:manipulation;
+}
+.download-stage-button span{
+  white-space:nowrap;
 }
 .download-stage-button::before{
   content:"";
@@ -2613,7 +2626,7 @@ html.home-reveal-pending:not(.skip-intro) .intro-start{
 .download-stage-button:active{
   transform:translateY(-1px) scale(.985);
 }
-.download-stage-apple{
+.download-stage-platform-icon{
   width:26px;
   height:26px;
   flex:0 0 auto;
@@ -2803,8 +2816,9 @@ html.home-reveal-pending:not(.skip-intro) .intro-start{
   .download-stage-kicker{margin-bottom:15px;font-size:16px}
   .download-stage-copy h2{font-size:clamp(40px,14vw,62px);line-height:1.04;letter-spacing:-.055em}
   .download-stage-subtitle{margin-top:22px;font-size:18px;line-height:1.55}
-  .download-stage-button{min-width:214px;height:64px;margin-top:28px;border-radius:20px;font-size:19px;padding:0 28px}
-  .download-stage-apple{width:23px;height:23px}
+  .download-stage-actions{grid-template-columns:1fr;gap:12px;width:min(300px,100%);margin-top:28px}
+  .download-stage-button{width:100%;min-width:0;height:64px;margin-top:0;border-radius:20px;font-size:19px;padding:0 24px}
+  .download-stage-platform-icon{width:23px;height:23px}
   .download-cat{bottom:-74px;width:min(330px,78vw)}
 }
 @media(prefers-reduced-motion:reduce){
@@ -2934,8 +2948,11 @@ body,
   font-size:clamp(25px,2.35vw,38px);
   line-height:1.38;
 }
-.download-stage-button{
+.download-stage-actions{
   margin-top:clamp(34px,4.6vh,58px);
+}
+.download-stage-button{
+  margin-top:0;
   min-width:258px;
   height:82px;
   border-radius:26px;
@@ -3117,7 +3134,7 @@ body,
 .lumatrace-download-stage:focus-within .paw-right{transform:rotate(10deg) translateY(0)}
 
 @media(min-width:900px) and (max-height:700px){
-  .download-stage-button{margin-top:clamp(20px,2.6vh,32px)}
+  .download-stage-actions{margin-top:clamp(20px,2.6vh,32px)}
   .download-cat{width:clamp(340px,19vw,400px)}
 }
 @media(max-width:1180px){
@@ -3134,7 +3151,8 @@ body,
   .download-stage-copy{width:calc(100% - 32px);margin-top:82px}
   .download-stage-copy h2{font-size:clamp(42px,14vw,66px);line-height:1.02;letter-spacing:-.058em}
   .download-stage-subtitle{font-size:18px;line-height:1.5}
-  .download-stage-button{min-width:214px;height:64px;margin-top:30px;border-radius:20px;font-size:19px;padding:0 28px}
+  .download-stage-actions{grid-template-columns:1fr;gap:12px;width:min(300px,100%);margin-top:30px}
+  .download-stage-button{width:100%;min-width:0;height:64px;margin-top:0;border-radius:20px;font-size:19px;padding:0 24px}
   .download-cat-hover-zone{height:clamp(160px,30vh,300px)}
   .download-cat{bottom:-36px;width:min(330px,82vw)}
   .download-cat-paw{top:auto;bottom:clamp(236px,31svh,270px);width:58px;height:42px}

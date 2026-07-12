@@ -13,7 +13,7 @@
   const alignCatToBottomEdge = (stage) => {
     const cat = stage.querySelector('.download-cat');
     const card = stage.querySelector('.lumatrace-download-card') || stage;
-    const button = stage.querySelector('.download-stage-button');
+    const button = stage.querySelector('.download-stage-actions') || stage.querySelector('.download-stage-button');
     if (!cat) return;
 
     const stageRect = getRect(stage);
