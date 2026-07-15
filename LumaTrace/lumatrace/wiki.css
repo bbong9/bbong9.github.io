@@ -2030,6 +2030,7 @@ body.ss-ref-page{background:var(--ss-ref-canvas)}
    It appears while scrolling and hides itself shortly after scrolling stops. */
 :root{
   --wiki-bottom-nav-bottom:max(18px, env(safe-area-inset-bottom));
+  --wiki-bottom-nav-max:1230px;
   --wiki-bottom-nav-ease:cubic-bezier(.2,.75,.2,1);
   --wiki-bottom-nav-bg:linear-gradient(180deg,rgba(255,255,255,.90),rgba(255,255,255,.72));
   --wiki-bottom-nav-border:rgba(215,225,245,.74);
@@ -2050,8 +2051,8 @@ body.ss-ref-page{background:var(--ss-ref-canvas)}
   bottom:var(--wiki-bottom-nav-bottom)!important;
   left:50%!important;
   z-index:120!important;
-  width:min(1120px,calc(100vw - 32px))!important;
-  max-width:calc(100vw - 32px)!important;
+  width:min(var(--wiki-bottom-nav-max),calc(100vw - 32px))!important;
+  max-width:min(var(--wiki-bottom-nav-max),calc(100vw - 32px))!important;
   height:auto!important;
   max-height:none!important;
   margin:0!important;
