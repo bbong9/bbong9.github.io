@@ -7,10 +7,12 @@
   <meta name="description" content="这里面向普通用户，按“下载 → 授权 → 验证”的顺序完成首次启动。">
   <link rel="icon" type="image/png" href="../lumatrace/lumatrace-icon.png?v=20260621-lumatrace-wiki-v4">
   <link rel="stylesheet" href="../lumatrace/wiki.css?v=20260715-bottom-nav-spacing-v1">
+  <link rel="stylesheet" href="../lumatrace/trial-card.css">
+  <script defer src="../lumatrace/trial-claim.js" data-trial-mount=".ss-ref-hero" data-trial-app="lumatrace"></script>
   <script>
     (() => {
       const key = 'lumatrace-wiki-theme';
-      if (localStorage.getItem(key) === 'dark') document.documentElement.classList.add('dark');
+      try { if (localStorage.getItem(key) === 'dark') document.documentElement.classList.add('dark'); } catch (_) {}
       window.addEventListener('DOMContentLoaded', () => {
         const button = document.querySelector('[data-theme-toggle]');
         const sync = () => {
@@ -20,7 +22,7 @@
         };
         button?.addEventListener('click', () => {
           const dark = document.documentElement.classList.toggle('dark');
-          localStorage.setItem(key, dark ? 'dark' : 'light');
+          try { localStorage.setItem(key, dark ? 'dark' : 'light'); } catch (_) {}
           sync();
         });
         sync();
