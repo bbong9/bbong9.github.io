@@ -23,12 +23,12 @@
   card.id = 'trial';
   card.setAttribute('aria-labelledby', 'trial-title');
   // Fixed, original markup only. Server values are always assigned as text.
-  card.innerHTML = '<div class="trial-heading"><p class="trial-eyebrow">LumaTrace</p><h2 id="trial-title">生成 3 天试用码</h2></div>' +
+  card.innerHTML = '<div class="trial-heading"><p class="trial-eyebrow">汐痕</p><h2 id="trial-title">生成 3 天试用码</h2></div>' +
     '<p class="trial-summary">请在 5 分钟内到 App 激活，激活后可用 3 天。每台设备只能试用一次。</p>' +
     '<p class="trial-status" role="status" aria-live="polite"></p>' +
     '<div class="trial-result" hidden><div class="trial-code-row"><code class="trial-code" tabindex="0" aria-label="试用授权码"></code>' +
     '<button type="button" class="trial-copy">复制</button></div><p class="trial-countdown"></p><p class="trial-expiry"></p>' +
-    '<ol class="trial-steps"><li>打开 LumaTrace，进入「设置 → 授权」。</li><li>粘贴试用码，点击激活。</li><li>激活成功后，3 天试用立即开始。</li></ol></div>' +
+    '<ol class="trial-steps"><li>打开汐痕，进入「设置 → 授权」。</li><li>粘贴试用码，点击激活。</li><li>激活成功后，3 天试用立即开始。</li></ol></div>' +
     '<button type="button" class="trial-claim">点击生成试用码</button><noscript>请启用 JavaScript 后生成试用码。</noscript>';
   anchor.insertAdjacentElement('afterend', card);
   const status = card.querySelector('.trial-status');
