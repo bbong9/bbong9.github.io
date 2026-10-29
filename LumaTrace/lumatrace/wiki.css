@@ -3629,3 +3629,31 @@ body,
   95.5%{opacity:.92;transform:scaleY(1)}
   97%{opacity:0;transform:scaleY(.04)}
 }
+
+.friend-links{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:12px 28px;
+  padding:24px max(24px,calc((100% - 1140px) / 2));
+  border-top:1px solid var(--vp-c-divider);
+  background:var(--vp-c-bg);
+  color:var(--vp-c-text-1);
+  font-size:14px;
+  line-height:22px;
+}
+.friend-links-title{font-weight:700}
+.friend-links a{
+  display:inline-flex;
+  flex-wrap:wrap;
+  gap:4px;
+  font-weight:600;
+  transition:color .2s;
+}
+.friend-links a:hover{color:var(--vp-c-brand-1)}
+.friend-links small{
+  color:var(--vp-c-text-2);
+  font-size:13px;
+  font-weight:400;
+}
+.ss-ref-page .friend-links{padding-bottom:calc(100px + env(safe-area-inset-bottom, 0px))}
