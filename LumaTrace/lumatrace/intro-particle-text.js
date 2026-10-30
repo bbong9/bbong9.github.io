@@ -163,7 +163,7 @@
     return items;
   };
 
-  const getWords = (canvas) => (canvas.dataset.words || 'WELCOME TO|LUMATRACE|DESIGN BY|BBONG9')
+  const getWords = (canvas) => (canvas.dataset.words || 'WELCOME TO|汐痕|DESIGN BY|BBONG9')
     .split('|')
     .map((word) => word.trim().toUpperCase())
     .filter(Boolean);
