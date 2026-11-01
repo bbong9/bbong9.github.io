@@ -3657,3 +3657,28 @@ body,
   font-weight:400;
 }
 .ss-ref-page .friend-links{padding-bottom:calc(100px + env(safe-area-inset-bottom, 0px))}
+
+/* Keep text readable when an outdated product screenshot is removed. */
+.wiki-hero-stacked .wiki-hero-visual.wiki-hero-app-icon{width:160px;padding:0;background:none;box-shadow:none}
+.wiki-hero-app-icon:before{display:none}
+.wiki-hero-stacked .wiki-hero-app-icon img{width:160px;height:160px;border-radius:0;box-shadow:none}
+.wiki-update-summary{max-width:560px;padding:18px 0}
+.wiki-update-summary p{color:var(--vp-c-text-2);line-height:1.7}
+.wiki-update-summary a{color:var(--vp-c-brand-1)}
+.ss-ref-hero-grid:has(> .ss-ref-copy:only-child),.ss-doc-grid:has(> .ss-doc-copy:only-child){grid-template-columns:minmax(0,1fr)}
+.ss-doc-grid.flip:has(> .ss-doc-copy:only-child) .ss-doc-copy{order:0}
+.ss-doc-grid:has(> .ss-doc-copy:only-child) .ss-doc-copy p,.ss-feature-section > .ss-ref-shell > .ss-doc-copy p{max-width:70ch}
+.ss-quick-access-copy{padding-top:64px}
+
+
+/* Light and dark renderings of the same synthetic interface. */
+.wiki-evidence-section{padding:56px 0}
+.wiki-evidence-section h2{font-size:26px;line-height:1.3}
+.wiki-evidence-section p,.wiki-evidence-figure figcaption{color:var(--vp-c-text-2);line-height:1.6}
+.wiki-evidence-figure{margin:28px 0}
+.wiki-evidence-figure img{display:block;width:100%;height:auto;border:1px solid var(--vp-c-divider);border-radius:8px}
+.wiki-evidence-figure figcaption{margin-top:9px;font-size:14px}
+.wiki-evidence-figure .wiki-evidence-dark,.dark .wiki-evidence-figure .wiki-evidence-light{display:none}
+.dark .wiki-evidence-figure .wiki-evidence-dark{display:block}
+.wiki-evidence-details{border-top:1px solid var(--vp-c-divider);padding:14px 0}
+.wiki-evidence-details summary{cursor:pointer;font-weight:600;line-height:1.6}

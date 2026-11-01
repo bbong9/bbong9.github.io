@@ -5,7 +5,7 @@
 本地预览：
 
 ```bash
-cd /Users/bbong9/Desktop/LumaTrace/wiki-site
+cd wiki-site
 python3 -m http.server 4174 --bind 127.0.0.1
 ```
 
