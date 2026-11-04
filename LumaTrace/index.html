@@ -7,6 +7,7 @@
   <meta name="description" content="汐痕跨平台截图、标注、OCR、翻译、长截图与录屏工具总览。">
   <link rel="icon" type="image/png" href="lumatrace/lumatrace-icon.png?v=20261022-xihen-icon">
   <link rel="stylesheet" href="lumatrace/wiki.css?v=20261029-friend-links">
+  <link rel="stylesheet" href="lumatrace/home-v2.css?v=20261104-home-v2">
   <script>
     (() => {
       const key = 'lumatrace-wiki-theme';
@@ -80,107 +81,105 @@
       <p class="intro-start-fallback">WELCOME TO<br>汐痕<br>DESIGN BY<br>BBONG9</p>
     </noscript>
   </section>
-  <main id="VPContent" class="wiki-home-content">
-    <section class="wiki-hero-shell wiki-hero-stacked home-hero lumatrace-home-hero">
-      <div class="wiki-hero-copy">
-        <p class="eyebrow">macOS 2.24 · Windows 原生截图工具</p>
-        <h1 class="home-animated-title" aria-label="汐痕">
-          <span class="home-title-text" aria-hidden="true">
-            <span class="home-title-letter" style="--letter-index:0">汐</span><span class="home-title-letter" style="--letter-index:1">痕</span>
-          </span>
-          <span class="home-title-underline" aria-hidden="true"></span>
-        </h1>
-      </div>
-      <div class="wiki-hero-visual wiki-hero-app-icon">
-        <img decoding="async" src="lumatrace/lumatrace-display.png" alt="汐痕应用图标" width="256" height="256">
-      </div>
-      <div class="wiki-hero-bottom">
-        <div class="wiki-hero-actions wiki-hero-actions-single">
-          <a class="primary rainbow-start-button" href="wiki/quickstart.html"><span class="cta-text">立即开始</span></a>
+  <main id="VPContent" class="wiki-home-content lt-home">
+    <section class="lt-hero">
+      <div class="lt-wrap lt-hero-in">
+        <img class="lt-appicon" src="lumatrace/lumatrace-icon.png" alt="汐痕图标" width="96" height="96">
+        <p class="lt-eyebrow">汐痕 LumaTrace</p>
+        <h1>截下<em>关键瞬间</em>，<br>标清<em>每一个重点</em></h1>
+        <p class="lt-lead">面向日常办公、产品反馈、教程制作和隐私打码：按快捷键框选，直接标注或识别文字，最后复制、保存、贴图，或进入长截图和录屏。</p>
+        <div class="lt-actions">
+          <a class="lt-btn primary big" href="https://bbong9.github.io/LumaTrace/downloads/LumaTrace-latest.dmg" download><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.05 12.35c-.03-2.42 1.98-3.6 2.07-3.66-1.14-1.67-2.9-1.9-3.52-1.93-1.48-.16-2.92.88-3.68.88-.77 0-1.94-.86-3.2-.84-1.64.03-3.16.98-4 2.48-1.72 2.98-.44 7.36 1.21 9.77.83 1.18 1.79 2.5 3.05 2.45 1.23-.05 1.69-.78 3.18-.78 1.48 0 1.9.78 3.19.75 1.32-.02 2.15-1.18 2.94-2.37.95-1.35 1.33-2.68 1.35-2.75-.03-.01-2.57-.98-2.59-4Zm-2.42-7.16c.66-.82 1.11-1.94.99-3.07-.96.04-2.16.66-2.85 1.45-.62.72-1.17 1.88-1.03 2.98 1.09.08 2.2-.55 2.89-1.36Z"/></svg><span>下载 macOS 版</span></a>
+          <a class="lt-btn big" href="wiki/quickstart.html">快速开始</a>
         </div>
-        <div class="wiki-stat-row"><span>快捷截图</span><span>本地 OCR</span><span>隐私打码</span><span>长截图/录屏</span></div>
-        <p class="lead">汐痕（原名 LumaTrace）面向日常办公、产品反馈、教程制作和隐私打码：按快捷键框选，直接标注或识别文字，最后复制、保存、贴图或进入长截图/录屏。</p>
+        <p class="lt-note">版本 2.24 · macOS 14 及以上 · Apple 芯片 / Intel 通用 · <a href="https://github.com/bbong9/bbong9.github.io/releases/download/windows-v2.13/LumaTrace-win-Setup.exe" download>Windows 版 2.13</a></p>
+      </div>
+      <div class="lt-wrap lt-stage">
+        <div class="lt-art" role="img" aria-label="汐痕框选截图并显示标注工具栏">
+          <div class="lt-sel"><span class="lt-sel-size">1280 × 720</span></div>
+          <img class="lt-tb lt-light" src="lumatrace/screenshots/toolbar-float-light.webp" alt="" width="1600" height="300" decoding="async"><img class="lt-tb lt-dark" src="lumatrace/screenshots/toolbar-float-dark.webp" alt="" width="1600" height="300" decoding="async">
+        </div>
+      </div>
+      <div class="lt-wrap">
+        <div class="lt-update">
+          <span class="lt-update-tag">2.24 新版本</span>
+          <ul><li>自动长截图回来了</li><li>导入图片做文字识别</li><li>编辑器可以找回裁剪</li><li>手动长截图预览不再突然变短</li></ul>
+          <a class="more" href="wiki/changelog.html#v224-2026-11-04">查看更新 →</a>
+        </div>
       </div>
     </section>
-    <section class="wiki-section wiki-home-section">
-      <div class="desktop-section-header"><h2>先看能做什么</h2><p>从截图、标注到识别与保存，选择适合你的操作。</p></div>
-      <div class="wiki-feature-grid">
-        <a class="wiki-feature-card" href="wiki/capture.html"><strong>截图工作流</strong><span>框选、窗口识别、工具栏、复制/保存/拖拽导出。</span></a>
-        <a class="wiki-feature-card" href="wiki/editor.html"><strong>标注与隐私保护</strong><span>箭头、矩形、文本、序号和方块马赛克；按住 Command + 鼠标滚轮可调节标注粗细、字号或马赛克方格大小。</span></a>
-        <a class="wiki-feature-card" href="wiki/ocr-translation.html"><strong>OCR 与翻译</strong><span>框选范围后直接识别/翻译，支持多国语言和可编辑文本框。</span></a>
-        <a class="wiki-feature-card" href="wiki/longshot-recording.html"><strong>长截图与录屏</strong><span>手动长截图、回滚和不稳定帧过滤、区域录屏和系统录音引导。</span></a>
-        <a class="wiki-feature-card" href="wiki/settings-permissions.html"><strong>设置与权限</strong><span>快捷键、保存格式、权限状态、授权和自动更新。</span></a>
-        <a class="wiki-feature-card" href="wiki/history-privacy.html"><strong>历史与隐私</strong><span>统一剪贴板历史、来源应用、隐私模式、删除规则和敏感信息边界。</span></a>
-        <a class="wiki-feature-card" href="wiki/settings-permissions.html"><strong>应用切换</strong><span>按 ⌥Tab 打开黑色磨砂窗口预览，恢复最小化窗口，并可从卡片快速退出应用。</span></a>
+
+    <section class="lt-section">
+      <div class="lt-wrap">
+        <div class="lt-panel">
+          <div class="lt-head"><h2>记录屏幕上的<em>一切</em></h2><p>截图、编辑、历史，常用动作都在手边。</p></div>
+          <div class="lt-tri">
+            <a href="wiki/capture.html"><img src="lumatrace/screenshots/capture-toolbar-light.webp" alt="" width="1440" height="900" loading="lazy" decoding="async"><b>截图</b><span>快捷键框选，识别窗口，工具栏直接复制、保存、贴图</span></a>
+            <a href="wiki/editor.html"><img src="lumatrace/screenshots/editor-desktop-light.webp" alt="" width="1440" height="900" loading="lazy" decoding="async"><b>标注</b><span>箭头、文本、序号、方块马赛克，一键遮住敏感信息</span></a>
+            <a href="wiki/history-privacy.html"><img src="lumatrace/screenshots/history-desktop-light.webp" alt="" width="1440" height="900" loading="lazy" decoding="async"><b>历史</b><span>图片、文本、视频混排，可搜索，敏感内容默认打码</span></a>
+          </div>
+        </div>
       </div>
     </section>
-    <section class="wiki-section wiki-home-section wiki-two-col">
-      <div>
-        <h2>推荐阅读顺序</h2>
-        <ol class="wiki-steps">
-          <li><b>安装与授权</b><span>macOS 截图和长截图需要屏幕录制权限；历史记录自动粘贴等功能需要辅助功能权限。</span></li>
-          <li><b>截图工作流</b><span>学会框选、工具栏、快捷键和导出方式，这是最高频功能。</span></li>
-          <li><b>编辑标注</b><span>掌握文本、箭头、序号、马赛克、Command 拖动选择，以及 Command + 鼠标滚轮无级调节粗细/字号。</span></li>
-          <li><b>OCR/翻译/API</b><span>macOS 本地 OCR 可直接识别；macOS 15 及以上可使用免费、免密钥的系统翻译。</span></li>
+
+    <section class="lt-section">
+      <div class="lt-wrap">
+        <div class="lt-row">
+          <div class="lt-copy"><p class="lt-tag">快速截图</p><h3><em>框选</em>，然后马上用起来</h3><p>按快捷键框选区域，也可以识别窗口。工具栏里直接复制、保存、贴图或拖拽导出；低频功能收在“更多”里。</p><a class="more" href="wiki/capture.html">截图工作流</a></div>
+          <figure class="lt-shot"><div class="lt-shot-bar" aria-hidden="true"><i></i><i></i><i></i></div><img class="lt-light" src="lumatrace/screenshots/capture-toolbar-light.webp" alt="截图工具栏" width="1440" height="900" loading="lazy" decoding="async"><img class="lt-dark" src="lumatrace/screenshots/capture-toolbar-dark.webp" alt="截图工具栏（深色）" width="1440" height="900" loading="lazy" decoding="async"></figure>
+        </div>
+        <div class="lt-row flip">
+          <div class="lt-copy"><p class="lt-tag">编辑与打码</p><h3><em>标注</em>与隐私保护</h3><p>箭头、矩形、文本、序号和方块马赛克。按住 Command 并滚动鼠标滚轮，可无级调节标注粗细、字号或马赛克方格大小。</p><a class="more" href="wiki/editor.html">编辑与标注</a></div>
+          <figure class="lt-shot"><div class="lt-shot-bar" aria-hidden="true"><i></i><i></i><i></i></div><img class="lt-light" src="lumatrace/screenshots/editor-desktop-light.webp" alt="汐痕编辑器" width="1440" height="900" loading="lazy" decoding="async"><img class="lt-dark" src="lumatrace/screenshots/editor-desktop-dark.webp" alt="汐痕编辑器（深色）" width="1440" height="900" loading="lazy" decoding="async"></figure>
+        </div>
+        <div class="lt-row">
+          <div class="lt-copy"><p class="lt-tag">快速操作</p><h3>截完<em>悬停</em>即用</h3><p>截图后的快速操作可以显示为角落卡片，也可以在设置里切换成顶部挂线，悬停即可复制、贴图或保存。</p><a class="more" href="wiki/settings-permissions.html">设置与权限</a></div>
+          <figure class="lt-shot"><div class="lt-shot-bar" aria-hidden="true"><i></i><i></i><i></i></div><img class="lt-light" src="lumatrace/screenshots/hangline-desktop-light.webp" alt="顶部挂线快速操作" width="1440" height="900" loading="lazy" decoding="async"><img class="lt-dark" src="lumatrace/screenshots/hangline-desktop-dark.webp" alt="顶部挂线快速操作（深色）" width="1440" height="900" loading="lazy" decoding="async"></figure>
+        </div>
+        <div class="lt-row flip">
+          <div class="lt-copy"><p class="lt-tag">历史与隐私</p><h3><em>统一</em>历史，默认打码</h3><p>图片、文本和视频按时间混排，可分类、搜索、预览、置顶和批量管理。历史里的敏感内容默认打码，按住 Option 可临时查看。</p><a class="more" href="wiki/history-privacy.html">历史与隐私</a></div>
+          <figure class="lt-shot"><div class="lt-shot-bar" aria-hidden="true"><i></i><i></i><i></i></div><img class="lt-light" src="lumatrace/screenshots/history-desktop-light.webp" alt="汐痕历史面板" width="1440" height="900" loading="lazy" decoding="async"><img class="lt-dark" src="lumatrace/screenshots/history-desktop-dark.webp" alt="汐痕历史面板（深色）" width="1440" height="900" loading="lazy" decoding="async"></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="lt-section" style="padding-top:0">
+      <div class="lt-wrap">
+        <div class="lt-head"><h2>还有这些</h2></div>
+        <div class="lt-cards">
+          <a class="lt-card" href="wiki/ocr-translation.html"><b>OCR 与翻译</b><span>框选后直接识别和翻译；macOS 15 起可用免费、免密钥的系统翻译，也可以导入图片做文字识别。</span></a>
+          <a class="lt-card" href="wiki/longshot-recording.html"><b>长截图与录屏</b><span>手动长截图和自动长截图，回滚与不稳定帧会被过滤；区域录屏与系统录音引导。</span></a>
+          <a class="lt-card" href="wiki/settings-permissions.html"><b>应用切换</b><span>按 ⌥Tab 打开黑色磨砂窗口预览，恢复最小化窗口，并可从卡片快速退出应用。</span></a>
+          <a class="lt-card" href="wiki/settings-permissions.html"><b>设置与权限</b><span>快捷键、保存格式、权限状态、授权和自动更新，一处查看。</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="lt-section">
+      <div class="lt-wrap">
+        <div class="lt-head"><h2>推荐上手顺序</h2></div>
+        <ol class="lt-steps">
+          <li><b>安装与授权</b><span>截图和长截图需要屏幕录制权限；历史自动粘贴等功能需要辅助功能权限。</span></li>
+          <li><b>截图工作流</b><span>学会框选、工具栏、快捷键和导出方式，这是最高频的功能。</span></li>
+          <li><b>编辑标注</b><span>文本、箭头、序号、马赛克，以及 Command 拖动选择。</span></li>
+          <li><b>OCR 与翻译</b><span>本地 OCR 直接识别；macOS 15 及以上可用系统翻译。</span></li>
         </ol>
       </div>
-      <div class="wiki-update-summary"><h2>macOS 2.24</h2><p>自动长截图回来了，手动长截图预览不再突然变短；新增导入图片做文字识别，编辑器可以找回裁剪。</p><p><a href="wiki/changelog.html#v224-2026-11-04">查看本次更新</a> · <a href="wiki/settings-permissions.html">查看设置与权限</a></p></div>
     </section>
-    <section class="lumatrace-download-stage" data-download-stage aria-labelledby="download-stage-title">
-      <div class="lumatrace-download-card">
-        <div class="download-stage-grid" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <div class="download-stage-glow download-stage-glow-a" aria-hidden="true"></div>
-        <div class="download-stage-glow download-stage-glow-b" aria-hidden="true"></div>
-        <div class="download-stage-copy">
-          <p class="download-stage-kicker">为每一次屏幕表达准备好</p>
-          <h2 id="download-stage-title">截下关键瞬间，标清每一个重点</h2>
-          <p class="download-stage-subtitle">截图、标注、打码、识别与贴图保存，一条丝滑工作流完成。</p>
-          <div class="download-stage-actions" aria-label="选择汐痕下载平台">
-            <a class="download-stage-button" href="https://bbong9.github.io/LumaTrace/downloads/LumaTrace-latest.dmg" download aria-label="下载汐痕 macOS 安装包">
-              <svg class="download-stage-platform-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path fill="currentColor" d="M17.05 12.35c-.03-2.42 1.98-3.6 2.07-3.66-1.14-1.67-2.9-1.9-3.52-1.93-1.48-.16-2.92.88-3.68.88-.77 0-1.94-.86-3.2-.84-1.64.03-3.16.98-4 2.48-1.72 2.98-.44 7.36 1.21 9.77.83 1.18 1.79 2.5 3.05 2.45 1.23-.05 1.69-.78 3.18-.78 1.48 0 1.9.78 3.19.75 1.32-.02 2.15-1.18 2.94-2.37.95-1.35 1.33-2.68 1.35-2.75-.03-.01-2.57-.98-2.59-4Zm-2.42-7.16c.66-.82 1.11-1.94.99-3.07-.96.04-2.16.66-2.85 1.45-.62.72-1.17 1.88-1.03 2.98 1.09.08 2.2-.55 2.89-1.36Z"/>
-              </svg>
-              <span>下载 macOS 版 · 2.24</span>
-            </a>
-            <a class="download-stage-button" href="https://license.bbong9.cn/updates/windows/LumaTrace-win-Setup-latest.exe" download aria-label="下载汐痕 Windows 2.18 安装包">
-              <svg class="download-stage-platform-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path fill="currentColor" d="M2 3.4 10.8 2v9.25H2V3.4Zm9.8-1.55L22 0v11.25H11.8V1.85ZM2 12.25h8.8V21L2 19.6v-7.35Zm9.8 0H22V23l-10.2-1.85v-8.9Z"/>
-              </svg>
-              <span>下载 Windows 2.18</span>
-            </a>
+
+    <section class="lt-dl" id="download">
+      <div class="lt-wrap">
+        <div class="lt-dl-card">
+          <h2>现在就试试汐痕</h2>
+          <p class="lt-dl-sub">截图、标注、打码、识别与贴图保存，一条丝滑工作流完成。</p>
+          <div class="lt-dl-actions" aria-label="选择汐痕下载平台">
+            <a class="lt-dl-btn" href="https://bbong9.github.io/LumaTrace/downloads/LumaTrace-latest.dmg" download aria-label="下载汐痕 macOS 安装包"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.05 12.35c-.03-2.42 1.98-3.6 2.07-3.66-1.14-1.67-2.9-1.9-3.52-1.93-1.48-.16-2.92.88-3.68.88-.77 0-1.94-.86-3.2-.84-1.64.03-3.16.98-4 2.48-1.72 2.98-.44 7.36 1.21 9.77.83 1.18 1.79 2.5 3.05 2.45 1.23-.05 1.69-.78 3.18-.78 1.48 0 1.9.78 3.19.75 1.32-.02 2.15-1.18 2.94-2.37.95-1.35 1.33-2.68 1.35-2.75-.03-.01-2.57-.98-2.59-4Zm-2.42-7.16c.66-.82 1.11-1.94.99-3.07-.96.04-2.16.66-2.85 1.45-.62.72-1.17 1.88-1.03 2.98 1.09.08 2.2-.55 2.89-1.36Z"/></svg><span>下载 macOS 版 · 2.24</span></a>
+            <a class="lt-dl-btn ghost" href="https://github.com/bbong9/bbong9.github.io/releases/download/windows-v2.13/LumaTrace-win-Setup.exe" download aria-label="下载汐痕 Windows 2.13 安装包"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 3.4 10.8 2v9.25H2V3.4Zm9.8-1.55L22 0v11.25H11.8V1.85ZM2 12.25h8.8V21L2 19.6v-7.35Zm9.8 0H22V23l-10.2-1.85v-8.9Z"/></svg><span>Windows 版 · 2.13</span></a>
           </div>
-        </div>
-        <div class="download-cat-hover-zone" aria-hidden="true"></div>
-        <div class="download-cat" aria-hidden="true">
-          <img class="download-cat-art" src="lumatrace/download-cat-reference.png?v=20260623-reference-cat-v5" alt="" decoding="async">
-          <span class="download-cat-blink-eye blink-left"></span>
-          <span class="download-cat-blink-eye blink-right"></span>
-          <div class="download-cat-tail"></div>
-          <div class="download-cat-body">
-            <span class="download-cat-face"></span>
-            <span class="download-cat-ear ear-left"></span>
-            <span class="download-cat-ear ear-right"></span>
-            <span class="download-cat-eye eye-left"></span>
-            <span class="download-cat-eye eye-right"></span>
-            <span class="download-cat-nose"></span>
-            <span class="download-cat-whisker whisker-left-a"></span>
-            <span class="download-cat-whisker whisker-left-b"></span>
-            <span class="download-cat-whisker whisker-right-a"></span>
-            <span class="download-cat-whisker whisker-right-b"></span>
-            <span class="download-cat-paw paw-left"></span>
-            <span class="download-cat-paw paw-right"></span>
-          </div>
-        </div>
-        <div class="download-cat-peek-paws" aria-hidden="true">
-          <span class="download-cat-peek-paw peek-paw-left"></span>
-          <span class="download-cat-peek-paw peek-paw-right"></span>
         </div>
       </div>
     </section>
-  <!-- wiki-109-evidence:start --><section class="ss-feature-section wiki-evidence-section" id="wiki-image-examples"><div class="ss-ref-shell"><h2>界面示例</h2><p>以下图片由界面离屏渲染与合成内容制作，具体设置值仅为示例。</p><figure class="wiki-evidence-figure"><img class="wiki-evidence-light" src="lumatrace/screenshots/capture-desktop-light.webp" alt="截图选区与工具栏，浅色合成示意" width="1440" height="900" loading="lazy" decoding="async"><img class="wiki-evidence-dark" src="lumatrace/screenshots/capture-desktop-dark.webp" alt="截图选区与工具栏，深色合成示意" width="1440" height="900" loading="lazy" decoding="async"><figcaption>截图选区与工具栏（合成示意）</figcaption></figure></div></section><!-- wiki-109-evidence:end -->
-</main>
+  </main>
   <footer class="friend-links" aria-label="友情链接">
     <span class="friend-links-title">相关站点</span>
     <a href="https://bbong9.github.io/xiyue-wiki/" target="_blank" rel="noopener">汐月 <small>iOS 音乐播放器</small></a>
@@ -188,7 +187,6 @@
   </footer>
   <script defer src="lumatrace/intro-particle-text.js?v=20260623-reference-cat-v5"></script>
   <script src="lumatrace/code-copy.js?v=20260621-lumatrace-wiki-v4" defer></script>
-  <script src="lumatrace/download-stage.js?v=20260712-windows-download-v1" defer></script>
   <script src="lumatrace/floating-nav.js?v=20260622-bottom-pill-nav" defer></script>
   <script src="lumatrace/top-nav-indicator.js?v=20260621-lumatrace-wiki-v4" defer></script>
 </body>

@@ -1,0 +1,138 @@
+/* 汐痕首页 v2：只作用于首页的 .lt-home，不影响其它 wiki 页面 */
+.lt-home{--lt-a:#3b5bdb;--lt-b:#7048e8;--lt-card:var(--vp-c-bg-elv);--lt-line:var(--vp-c-divider);--lt-soft:var(--vp-c-bg-soft);--lt-shadow:0 24px 60px -24px rgba(59,91,219,.35),0 8px 24px -12px rgba(0,0,0,.18)}
+.dark .lt-home{--lt-a:#8ea2ff;--lt-b:#b197fc;--lt-shadow:0 24px 60px -24px rgba(0,0,0,.7),0 8px 24px -12px rgba(0,0,0,.5)}
+.lt-wrap{width:min(1120px,100% - 32px);margin:0 auto}
+.lt-grad{background:linear-gradient(120deg,var(--lt-a),var(--lt-b));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lt-eyebrow{margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--lt-a);text-transform:uppercase}
+
+/* hero：居中，参考 ArcZip 的居中构图与 PixPin 的关键词高亮 */
+.lt-hero{position:relative;padding:56px 0 24px;background:radial-gradient(60% 50% at 20% 0,rgba(112,72,232,.14),transparent 70%),radial-gradient(50% 45% at 85% 10%,rgba(59,91,219,.12),transparent 70%)}
+.lt-hero-in{text-align:center;display:flex;flex-direction:column;align-items:center}
+.lt-appicon{width:84px;height:84px;border-radius:20px;box-shadow:0 14px 30px -14px rgba(59,91,219,.55);margin:0 0 18px}
+.lt-hero h1{margin:0 0 18px;padding:0;border:0;font-size:clamp(36px,6vw,68px);line-height:1.12;font-weight:800;letter-spacing:-.02em}
+.lt-hero h1 em,.lt-head h2 em,.lt-copy h3 em{font-style:normal;background:linear-gradient(120deg,var(--lt-a),var(--lt-b));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lt-lead{margin:0 0 28px;color:var(--vp-c-text-2);font-size:17px;line-height:29px;max-width:34em}
+.lt-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center}
+.lt-btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 22px;border-radius:23px;font-size:15px;font-weight:600;border:1px solid var(--lt-line);background:var(--lt-card);color:var(--vp-c-text-1);transition:transform .2s,box-shadow .2s,border-color .2s}
+.lt-btn.big{height:54px;padding:0 30px;border-radius:27px;font-size:16px}
+.lt-btn:hover{transform:translateY(-2px);border-color:var(--lt-a);box-shadow:0 10px 24px -12px rgba(59,91,219,.5)}
+.lt-btn.primary{background:linear-gradient(120deg,var(--lt-a),var(--lt-b));border-color:transparent;color:#fff;box-shadow:0 14px 28px -14px rgba(112,72,232,.7)}
+.lt-btn svg{width:18px;height:18px}
+.lt-note{margin:16px 0 0;font-size:13px;color:var(--vp-c-text-3)}
+.lt-note a{color:var(--vp-c-text-2);text-decoration:underline;text-underline-offset:3px}
+.lt-stage{margin-top:44px}
+.lt-stage .lt-shot{max-width:1000px;margin:0 auto}
+
+/* 屏幕示意窗口 */
+.lt-shot{margin:0;border:1px solid var(--lt-line);border-radius:14px;overflow:hidden;background:var(--lt-card);box-shadow:var(--lt-shadow)}
+.lt-shot-bar{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--lt-line);background:var(--lt-soft)}
+.lt-shot-bar i{width:10px;height:10px;border-radius:50%;background:var(--vp-c-border);opacity:.7}
+.lt-shot img{width:100%;height:auto}
+.lt-shot .lt-dark{display:none}
+.dark .lt-shot .lt-light{display:none}
+.dark .lt-shot .lt-dark{display:block}
+
+/* 2.24 更新条 */
+.lt-update{margin:40px 0 0;padding:22px 24px;border:1px solid var(--lt-line);border-radius:16px;background:var(--lt-card);display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
+.lt-update-tag{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(120deg,var(--lt-a),var(--lt-b));color:#fff;font-size:13px;font-weight:700;white-space:nowrap}
+.lt-update ul{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0;padding:0;list-style:none}
+.lt-update li{margin:0;font-size:15px;color:var(--vp-c-text-1)}
+.lt-update li:before{content:"✦ ";color:var(--lt-b)}
+.lt-update a.more{font-size:14px;font-weight:600;color:var(--lt-a);white-space:nowrap}
+
+/* 功能展示：左右交替 */
+.lt-section{padding:72px 0 0}
+.lt-head{text-align:center;margin:0 auto 40px;max-width:640px}
+.lt-head h2{margin:0 0 10px;padding:0;font-size:clamp(28px,3.6vw,38px);line-height:1.2;font-weight:800;letter-spacing:-.01em}
+.lt-head p{margin:0;color:var(--vp-c-text-2);font-size:16px;line-height:26px}
+.lt-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:center;margin:0 0 64px}
+.lt-row.flip{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.lt-row.flip .lt-copy{order:2}
+.lt-copy h3{margin:0 0 12px;font-size:clamp(22px,2.6vw,30px);line-height:1.25;font-weight:800}
+.lt-copy p{margin:0 0 14px;color:var(--vp-c-text-2);font-size:16px;line-height:28px}
+.lt-copy a.more{font-size:15px;font-weight:600;color:var(--lt-a)}
+.lt-copy a.more:after{content:" →"}
+
+/* 其余功能小卡片 */
+.lt-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.lt-card{display:block;padding:22px;border:1px solid var(--lt-line);border-radius:16px;background:var(--lt-card);transition:transform .2s,border-color .2s,box-shadow .2s}
+.lt-card:hover{transform:translateY(-3px);border-color:var(--lt-a);box-shadow:0 14px 30px -18px rgba(59,91,219,.55)}
+.lt-card b{display:block;margin:0 0 8px;font-size:18px;line-height:26px;color:var(--vp-c-text-1)}
+.lt-card span{display:block;font-size:14px;line-height:23px;color:var(--vp-c-text-2)}
+
+/* 上手顺序 */
+.lt-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:0;padding:0;list-style:none;counter-reset:s}
+.lt-steps li{margin:0;padding:22px;border:1px solid var(--lt-line);border-radius:16px;background:var(--lt-card);counter-increment:s}
+.lt-steps li:before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;margin:0 0 12px;border-radius:50%;background:linear-gradient(120deg,var(--lt-a),var(--lt-b));color:#fff;font-size:14px;font-weight:700}
+.lt-steps b{display:block;margin:0 0 6px;font-size:16px}
+.lt-steps span{font-size:14px;line-height:22px;color:var(--vp-c-text-2)}
+
+
+@media (max-width:900px){
+  .lt-hero{padding:32px 0 8px}
+  .lt-row,.lt-row.flip{grid-template-columns:1fr;gap:24px}
+  .lt-row.flip .lt-copy{order:0}
+  .lt-row{margin-bottom:48px}
+  .lt-update{grid-template-columns:1fr;gap:12px}
+  .lt-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lt-section{padding-top:56px}
+}
+@media (max-width:520px){
+  .lt-steps{grid-template-columns:1fr}
+  .lt-btn{width:100%;justify-content:center}
+}
+
+
+/* 概览面板：三张带缩略图的卡片（参考 PixPin） */
+.lt-panel{padding:40px 32px 32px;border-radius:28px;background:var(--lt-soft);border:1px solid var(--lt-line)}
+.lt-panel .lt-head{margin-bottom:28px}
+.lt-tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.lt-tri a{display:block;padding:12px 12px 20px;border-radius:18px;background:var(--lt-card);border:1px solid var(--lt-line);transition:transform .2s,box-shadow .2s,border-color .2s}
+.lt-tri a:hover{transform:translateY(-4px);border-color:var(--lt-a);box-shadow:0 16px 32px -20px rgba(59,91,219,.6)}
+.lt-tri img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid var(--lt-line);margin:0 0 14px}
+.dark .lt-tri img{filter:brightness(.8)}
+.lt-tri b{display:block;margin:0 8px 6px;font-size:18px;color:var(--lt-a)}
+.lt-tri span{display:block;margin:0 8px;font-size:14px;line-height:22px;color:var(--vp-c-text-2)}
+.lt-tag{margin:0 0 10px;font-size:13px;font-weight:700;color:var(--lt-b)}
+.lt-shot{position:relative}
+.lt-row .lt-shot{box-shadow:var(--lt-shadow)}
+
+/* 下载区 */
+.lt-dl{padding:72px 0 64px}
+.lt-dl-card{position:relative;overflow:hidden;border-radius:28px;text-align:center;color:#fff;padding:64px 24px;
+  background:radial-gradient(circle at 12% 8%,rgba(255,255,255,.18),transparent 32%),radial-gradient(circle at 90% 100%,rgba(255,255,255,.14),transparent 36%),linear-gradient(135deg,#4f46e5 0%,#7048e8 55%,#8b43ff 100%);
+  box-shadow:0 30px 70px -30px rgba(111,49,223,.7)}
+.lt-dl h2{margin:0 0 14px;padding:0;border:0;color:#fff;font-size:clamp(30px,5vw,48px);line-height:1.15;font-weight:800;letter-spacing:-.02em}
+.lt-dl-sub{margin:0 auto 30px;max-width:32em;font-size:clamp(16px,1.8vw,19px);line-height:1.6;opacity:.92}
+.lt-dl-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.lt-dl-btn{display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 28px;border-radius:27px;background:#fff;color:#4c2bb8;font-size:16px;font-weight:700;box-shadow:0 12px 26px -14px rgba(30,10,80,.6);transition:transform .2s,box-shadow .2s}
+.lt-dl-btn.ghost{background:rgba(255,255,255,.16);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.4)}
+.lt-dl-btn:hover{transform:translateY(-2px)}
+.lt-dl-btn svg{width:20px;height:20px}
+@media (max-width:900px){.lt-tri{grid-template-columns:1fr}.lt-panel{padding:28px 16px 16px}}
+@media (max-width:600px){.lt-dl-btn{width:100%;justify-content:center}.lt-dl-card{padding:48px 20px}}
+
+/* 首屏展示：蓝色波浪背景 + 模拟选区 + 浮动工具栏 */
+.lt-stage .lt-art{position:relative;max-width:1000px;margin:0 auto;aspect-ratio:2000/876;border-radius:24px;overflow:hidden;background:#2f8fe6 url(screenshots/hero-wave.webp) center/cover no-repeat;box-shadow:var(--lt-shadow)}
+.lt-sel{position:absolute;left:12%;right:12%;top:9%;height:50%;border:1.5px solid #fff;background:rgba(255,255,255,.14);border-radius:2px;box-shadow:0 0 0 1px rgba(40,110,220,.35)}
+.lt-sel:before,.lt-sel:after{content:"";position:absolute;inset:-4px;background:
+ radial-gradient(circle,#fff 0 3.5px,transparent 4px) 0 0/8px 8px no-repeat,
+ radial-gradient(circle,#fff 0 3.5px,transparent 4px) 100% 0/8px 8px no-repeat,
+ radial-gradient(circle,#fff 0 3.5px,transparent 4px) 0 100%/8px 8px no-repeat,
+ radial-gradient(circle,#fff 0 3.5px,transparent 4px) 100% 100%/8px 8px no-repeat;pointer-events:none}
+.lt-sel:after{background:
+ radial-gradient(circle,#fff 0 3.5px,transparent 4px) 50% 0/8px 8px no-repeat,
+ radial-gradient(circle,#fff 0 3.5px,transparent 4px) 50% 100%/8px 8px no-repeat,
+ radial-gradient(circle,#fff 0 3.5px,transparent 4px) 0 50%/8px 8px no-repeat,
+ radial-gradient(circle,#fff 0 3.5px,transparent 4px) 100% 50%/8px 8px no-repeat}
+.lt-sel-size{position:absolute;left:0;top:-30px;padding:3px 9px;border-radius:6px;background:rgba(20,30,60,.62);color:#fff;font-size:12px;line-height:18px;font-variant-numeric:tabular-nums}
+.lt-art .lt-tb{position:absolute;left:50%;top:63%;width:72%;transform:translateX(-50%);filter:drop-shadow(0 14px 22px rgba(10,40,120,.35))}
+.lt-art .lt-dark{display:none}
+.dark .lt-art .lt-light{display:none}
+.dark .lt-art .lt-dark{display:block}
+@media (max-width:600px){.lt-stage .lt-art{border-radius:16px}.lt-sel-size{font-size:10px;top:-24px}.lt-art .lt-tb{width:92%;top:66%}}
+
+/* 渐变背景从页面最顶端开始，不再露出导航后面的白条 */
+.lt-home.wiki-home-content{padding-top:0}
+.lt-home .lt-hero{padding-top:128px}
+@media (max-width:900px){.lt-home .lt-hero{padding-top:104px}}
